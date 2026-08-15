@@ -1,0 +1,228 @@
+main.salario {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 56px 0 64px;
+}
+
+.grade-salario {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.cartao-intro-salario {
+    background: var(--verde-escuro);
+    color: #fff;
+    border-radius: var(--raio);
+    padding: 36px;
+    box-shadow: var(--sombra);
+}
+
+.cartao-intro-salario h2 {
+    font-family: var(--fonte-display);
+    font-size: 1.9rem;
+    margin-bottom: 14px;
+}
+
+.cartao-intro-salario p {
+    color: var(--verde-claro);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 14px;
+}
+
+.linha-salario-bruto {
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.25);
+}
+
+.linha-salario-bruto span {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--verde-claro);
+    margin-bottom: 4px;
+}
+
+.linha-salario-bruto strong {
+    font-family: var(--fonte-numero);
+    font-size: 1.6rem;
+}
+
+.recibo {
+    background: var(--papel-cartao);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 32px 32px 24px;
+    position: relative;
+}
+
+.recibo h3 {
+    font-family: var(--fonte-display);
+    font-size: 1.2rem;
+    color: var(--verde-escuro);
+    margin-bottom: 4px;
+}
+
+.recibo .subtitulo-recibo {
+    font-size: 0.8rem;
+    color: var(--tinta-suave);
+    margin-bottom: 20px;
+}
+
+.item-recibo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(27, 67, 50, 0.15);
+    opacity: 0;
+    transform: translateX(-8px);
+}
+
+.item-recibo.mostrar {
+    animation: entra-item 0.45s ease forwards;
+}
+
+@keyframes entra-item {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.item-recibo .rotulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: var(--tinta);
+}
+
+.item-recibo .rotulo .textos {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-recibo .rotulo .detalhe {
+    font-size: 0.7rem;
+    color: var(--tinta-suave);
+    font-weight: 400;
+}
+
+.linha-separador {
+    margin: 14px 0 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--verde-medio);
+}
+
+.item-recibo .rotulo i {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--verde-claro);
+    color: var(--verde-escuro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.item-recibo .valor {
+    font-family: var(--fonte-numero);
+    color: var(--tomate);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.linha-subtotal {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0 0;
+    font-family: var(--fonte-numero);
+    font-size: 0.9rem;
+    color: var(--tinta-suave);
+}
+
+.resultado-final {
+    margin-top: 22px;
+    background: var(--verde-claro);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.resultado-final.mostrar {
+    animation: entra-resultado 0.5s ease forwards;
+}
+
+@keyframes entra-resultado {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resultado-final span {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--verde-escuro);
+    margin-bottom: 6px;
+}
+
+.resultado-final strong {
+    font-family: var(--fonte-numero);
+    font-size: 2rem;
+    color: var(--verde-escuro);
+}
+
+.btn-primario {
+    width: 100%;
+    margin-top: 22px;
+    background: var(--verde-escuro);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .15s ease, background .2s ease, opacity .3s ease;
+}
+
+.btn-primario.ativo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.btn-primario:hover {
+    background: var(--verde-medio);
+    transform: translateY(-1px);
+}
+
+@media (max-width:760px) {
+    .grade-salario {
+        grid-template-columns: 1fr;
+    }
+
+    .recibo,
+    .cartao-intro-salario {
+        padding: 24px;
+    }
+}

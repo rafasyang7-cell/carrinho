@@ -1,0 +1,404 @@
+/* ===== Conteúdo - Mercado ===== */
+main.mercado {
+    flex: 1;
+    padding: 32px 0 110px;
+}
+
+.grade-topo-mercado {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 26px;
+}
+
+.aviso-familia {
+    background: var(--verde-claro);
+    color: var(--verde-escuro);
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+}
+
+.aviso-familia i {
+    font-size: 1.1rem;
+}
+
+/* ----- Mascote lateral ----- */
+.mascote-lateral {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+    padding: 16px;
+    text-align: center;
+}
+
+.mascote-lateral .rotulo-mascote {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--tinta-suave);
+    margin-bottom: 8px;
+    display: block;
+}
+
+#mascote-caixa {
+    width: 100%;
+}
+
+.mascote-visual {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+}
+
+.mascote-visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.mascote-visual svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mascote-anima {
+    animation: pulso-mascote .45s ease;
+}
+
+@keyframes pulso-mascote {
+    0% {
+        transform: scale(0.85);
+        opacity: 0.4;
+    }
+
+    60% {
+        transform: scale(1.06);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Abas das seções */
+.abas-secoes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+}
+
+.aba {
+    background: #fff;
+    border: 1.5px solid rgba(27, 67, 50, 0.12);
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--tinta-suave);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .2s ease;
+}
+
+.aba i {
+    font-size: 0.9rem;
+}
+
+.aba .contagem {
+    font-family: var(--fonte-numero);
+    font-size: 0.72rem;
+    background: var(--papel);
+    padding: 1px 7px;
+    border-radius: 100px;
+}
+
+.aba.ativa {
+    background: var(--verde-escuro);
+    border-color: var(--verde-escuro);
+    color: #fff;
+}
+
+.aba.ativa .contagem {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+/* Seção */
+.secao-mercado {
+    display: none;
+    animation: aparece .35s ease both;
+}
+
+.secao-mercado.ativa {
+    display: block;
+}
+
+@keyframes aparece {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cabecalho-secao {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.cabecalho-secao h2 {
+    font-family: var(--fonte-display);
+    font-size: 1.4rem;
+    color: var(--verde-escuro);
+}
+
+.meta-minimo {
+    font-family: var(--fonte-numero);
+    font-size: 0.8rem;
+    color: var(--verde-medio);
+}
+
+.meta-minimo.incompleto {
+    color: var(--tomate);
+}
+
+.grade-alimentos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.cartao-alimento {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    border: 1.5px solid transparent;
+    transition: border-color .2s ease;
+}
+
+.cartao-alimento.selecionado {
+    border-color: var(--verde-folha);
+}
+
+.foto-alimento {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 9px;
+    background: var(--papel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.foto-alimento .emoji-alimento {
+    font-size: 2.6rem;
+}
+
+.foto-alimento img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rotulo-tipo {
+    align-self: flex-start;
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 9px;
+    border-radius: 100px;
+}
+
+.rotulo-tipo.natural {
+    background: var(--verde-claro);
+    color: var(--verde-escuro);
+}
+
+.rotulo-tipo.processado {
+    background: #FBF1D6;
+    color: #8A6D1D;
+}
+
+.rotulo-tipo.ultraprocessado {
+    background: var(--tomate-claro);
+    color: #B3401E;
+}
+
+.cartao-alimento h4 {
+    font-size: 0.96rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.cartao-alimento .unidade-alimento {
+    font-size: 0.74rem;
+    color: var(--tinta-suave);
+}
+
+.cartao-alimento .preco {
+    font-family: var(--fonte-numero);
+    font-size: 1.1rem;
+    color: var(--verde-escuro);
+}
+
+.seletor-qtd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--papel);
+    border-radius: 10px;
+    padding: 6px;
+}
+
+.seletor-qtd button {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--verde-escuro);
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.seletor-qtd button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.seletor-qtd .qtd {
+    font-family: var(--fonte-numero);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.aviso-item {
+    font-size: 0.74rem;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding-top: 2px;
+}
+
+.aviso-item--dica {
+    color: var(--tinta-suave);
+}
+
+.aviso-item--alerta {
+    color: var(--tomate);
+    font-weight: 600;
+}
+
+.aviso-item--ok {
+    color: var(--verde-medio);
+    font-weight: 600;
+}
+
+/* Rodapé fixo de finalização */
+.rodape-finalizar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid rgba(27, 67, 50, 0.12);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+    padding: 14px 0;
+    z-index: 15;
+}
+
+.rodape-finalizar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.aviso-minimo {
+    font-size: 0.82rem;
+    color: var(--tinta-suave);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-finalizar {
+    background: var(--verde-escuro);
+    color: #fff;
+    padding: 13px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    transition: background .2s ease, transform .15s ease;
+}
+
+.btn-finalizar:hover {
+    background: var(--verde-medio);
+    transform: translateY(-1px);
+}
+
+@media (max-width:760px) {
+    .grade-topo-mercado {
+        grid-template-columns: 1fr;
+    }
+
+    .mascote-lateral {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-align: left;
+    }
+
+    .mascote-visual {
+        margin: 0;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width:600px) {
+    .rodape-finalizar .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-finalizar {
+        justify-content: center;
+    }
+}

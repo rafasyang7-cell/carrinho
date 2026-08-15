@@ -1,0 +1,117 @@
+/* ===== Header - Mercado (com recibo fixo no canto) ===== */
+.topo {
+    background: var(--verde-escuro);
+    color: #fff;
+    padding: 16px 0;
+    border-bottom: 6px solid var(--trigo);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.topo .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.marca .icone-marca {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--verde-folha);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--verde-escuro);
+    flex-shrink: 0;
+}
+
+.marca h1 {
+    font-family: var(--fonte-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.1;
+}
+
+.marca span {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-top: 2px;
+}
+
+/* Recibo fixo (canto) mostrando saldo em tempo real */
+.recibo-flutuante {
+    background: #fff;
+    color: var(--tinta);
+    border-radius: 12px;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.recibo-flutuante .bloco {
+    text-align: right;
+}
+
+.recibo-flutuante .bloco span {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--tinta-suave);
+}
+
+.recibo-flutuante .bloco strong {
+    font-family: var(--fonte-numero);
+    font-size: 1.05rem;
+}
+
+#saldo-restante.negativo {
+    color: var(--tomate);
+}
+
+#saldo-restante.ok {
+    color: var(--verde-medio);
+}
+
+.recibo-flutuante .divisor {
+    width: 1px;
+    height: 30px;
+    background: rgba(27, 67, 50, 0.15);
+}
+
+.recibo-flutuante .icone-cesta {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--verde-claro);
+    color: var(--verde-escuro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width:560px) {
+    .marca h1 {
+        font-size: 0.95rem;
+    }
+
+    .recibo-flutuante {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
