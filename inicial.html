@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Desafio do Carrinho Real</title>
+    <link rel="stylesheet" href="css/inicialstyle.css">
+    <link rel="stylesheet" href="css/inicialheader.css">
+    <link rel="stylesheet" href="css/inicialhome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="topo">
+        <div class="container">
+            <div class="marca">
+                <div class="icone-marca"><i class="fa-solid fa-basket-shopping"></i></div>
+                <div>
+                    <h1>Desafio do Carrinho Real</h1>
+                    <span>Simulação · Técnico em Nutrição e Dietética</span>
+                </div>
+            </div>
+            <span class="passo">PASSO 1 DE 4 · INÍCIO</span>
+        </div>
+    </header>
+
+    <main class="inicio">
+        <div class="container">
+            <div class="cartao-boas-vindas">
+
+                <div class="texto-intro">
+                    <span class="selo"><i class="fa-solid fa-circle-info"></i> Simulação educativa</span>
+                    <h2>Quanto custa comer bem no Brasil?</h2>
+                    <p>Você vai assumir o papel de um chefe de família e precisará administrar o orçamento
+                        doméstico para alimentar 4 pessoas por um mês inteiro, dentro do que sobra depois de
+                        pagar impostos e contas essenciais.</p>
+                    <p>Ao final, você vai descobrir se conseguiu montar uma alimentação nutritiva — ou se
+                        o preço dos alimentos saudáveis te empurrou para os ultraprocessados.</p>
+                    <p class="fonte-dado"><i class="fa-solid fa-flask"></i> Dados de preços baseados em
+                        pesquisa de mercado (2026) e estudo da UFMG sobre a queda no preço de ultraprocessados
+                        frente aos alimentos in natura.</p>
+                </div>
+
+                <div class="painel-familia">
+                    <h3>Sua família</h3>
+                    <p>Você cuida do sustento de 4 pessoas este mês.</p>
+                    <div class="familia-icones">
+                        <div class="membro"><i class="fa-solid fa-user"></i></div>
+                        <div class="membro"><i class="fa-solid fa-user"></i></div>
+                        <div class="membro"><i class="fa-solid fa-child"></i></div>
+                        <div class="membro"><i class="fa-solid fa-child"></i></div>
+                    </div>
+
+                    <div class="linha-mascote-selecao">
+                        <div id="mascote-caixa"></div>
+                        <p style="font-size:0.82rem; color:var(--tinta-suave); margin:0;">
+                            Escolha o personagem que vai te representar durante a simulação.
+                        </p>
+                    </div>
+
+                    <form id="form-inicio">
+                        <div class="campo">
+                            <label for="nome-jogador">Como podemos te chamar?</label>
+                            <input type="text" id="nome-jogador" placeholder="Digite seu nome" autocomplete="off">
+                        </div>
+                        <div class="aviso-nome" id="aviso-nome"></div>
+
+                        <div class="campo">
+                            <label>Sexo do personagem</label>
+                            <div class="opcoes-sexo" id="opcoes-sexo">
+                                <button type="button" class="opcao-sexo" data-sexo="feminino">Feminino</button>
+                                <button type="button" class="opcao-sexo" data-sexo="masculino">Masculino</button>
+                                <button type="button" class="opcao-sexo" data-sexo="nao-binario">Não binário</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primario">
+                            Começar simulação <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape-jogo">
+        <div class="container rodape-conteudo">
+            <span><i class="fa-solid fa-school"></i> ETEC Benedito Storani · 3° Nutrição</span>
+            <span class="rodape-fontes">Fontes: pesquisa de preços de mercado (2026) · estudo UFMG sobre
+                ultraprocessados · DIEESE/Decreto 12.797/2025 (salário mínimo)</span>
+        </div>
+    </footer>
+
+    <script src="script/mascote.js"></script>
+    <script src="script/inicial.js"></script>
+</body>
+
+</html>
