@@ -52,8 +52,7 @@
                         <div class="item-recibo" data-valor="121.58">
                             <span class="rotulo">
                                 <i class="fa-solid fa-file-invoice-dollar"></i>
-                                <span class="textos">INSS<span class="detalhe">7,5% sobre o salário
-                                        mínimo</span></span>
+                                <span class="textos">INSS<span class="detalhe">7,5% sobre o salário mínimo</span></span>
                             </span>
                             <span class="valor">− R$ 121,58</span>
                         </div>
@@ -82,10 +81,13 @@
                                     esgoto</span></span>
                             <span class="valor">− R$ 100,00</span>
                         </div>
-                        <div class="item-recibo" data-valor="100">
-                            <span class="rotulo"><i class="fa-solid fa-fire-burner"></i> <span class="textos">Gás de
-                                    cozinha</span></span>
-                            <span class="valor">− R$ 100,00</span>
+                        <div class="item-recibo" data-valor="33.33">
+                            <span class="rotulo">
+                                <i class="fa-solid fa-fire-burner"></i>
+                                <span class="textos">Gás de cozinha<span class="detalhe">R$ 100,00 ÷ 3 (o botijão dura
+                                        ~3 meses)</span></span>
+                            </span>
+                            <span class="valor">− R$ 33,33</span>
                         </div>
                         <div class="item-recibo" data-valor="100">
                             <span class="rotulo"><i class="fa-solid fa-wifi"></i> <span class="textos">Plano de
@@ -101,7 +103,7 @@
 
                     <div class="resultado-final" id="resultado-final">
                         <span>Valor disponível para alimentação este mês</span>
-                        <strong id="valor-alimentacao">R$ 182,16</strong>
+                        <strong id="valor-alimentacao">R$ 248,83</strong>
                     </div>
 
                     <button class="btn-primario" id="btn-ir-mercado">
@@ -115,11 +117,22 @@
 
     <footer class="rodape-jogo">
         <div class="container rodape-conteudo">
-            <span><i class="fa-solid fa-school"></i> ETEC Benedito Storani · Técnico em Nutrição e Dietética</span>
-            <span class="rodape-fontes">Fontes: Decreto 12.797/2025 (salário mínimo 2026) · regras gerais de INSS e
-                vale-transporte</span>
+            <div class="rodape-escola">
+                <span class="icone-rodape"><i class="fa-solid fa-graduation-cap"></i></span>
+                <span class="textos-rodape">
+                    <strong>ETEC Benedito Storani</strong>
+                    <span>Técnico em Nutrição e Dietética</span>
+                </span>
+            </div>
+            <p class="rodape-fontes">
+                <strong>Fontes dos dados</strong>
+                Pesquisa de preços de mercado (2026) · Estudo da UFMG sobre alimentos in natura x ultraprocessados ·
+                Decreto 12.797/2025 (salário mínimo 2026) · Regras gerais de INSS e vale-transporte
+            </p>
         </div>
     </footer>
 
     <script src="script/salario.js"></script>
 </body>
+
+</html>

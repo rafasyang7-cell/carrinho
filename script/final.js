@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const dadosBrutos = localStorage.getItem('carrinhoReal_resultado');
 
     if (!dadosBrutos) {
-        // Ninguém jogou ainda / dados perdidos: volta para o início
         window.location.href = 'inicial.html';
         return;
     }
@@ -16,22 +15,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalItens = dados.itensNatural + dados.itensProcessado + dados.itensUltra;
     const saldoFinal = dados.orcamentoTotal - dados.gastoTotal;
 
-    // Textos principais
     document.getElementById('titulo-resultado').textContent = `Fim de mês, ${nome}`;
 
     const seloEl = document.getElementById('selo-status');
     const mensagemEl = document.getElementById('mensagem-principal');
 
+    let estadoMascote = 'neutro';
+
     if (dados.fatoresRisco >= 3) {
         seloEl.classList.add('alerta');
         seloEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Orçamento apertado, saúde em risco';
+        estadoMascote = 'triste';
     } else if (dados.fatoresRisco > 0) {
         seloEl.classList.add('alerta');
         seloEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Alguns pontos de atenção';
+        estadoMascote = 'preocupado';
+    } else if (dados.essenciaisFaltando && dados.essenciaisFaltando.length > 0) {
+        seloEl.classList.add('alerta');
+        seloEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Cesta saudável, mas incompleta';
+        estadoMascote = 'preocupado';
     } else {
         seloEl.classList.add('bom');
         seloEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Cesta majoritariamente saudável';
+        estadoMascote = 'feliz';
     }
+
+    atualizarMascote(estadoMascote);
 
     mensagemEl.textContent =
         `Parabéns, você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)}, ` +
@@ -40,21 +49,33 @@ document.addEventListener('DOMContentLoaded', () => {
         `na cesta. Isso mostra como o preço pode empurrar famílias de baixa renda para uma alimentação ` +
         `menos nutritiva, mesmo quando a intenção é comer bem.`;
 
-    // Números
     document.getElementById('num-gasto').textContent = formatarMoeda(dados.gastoTotal);
     document.getElementById('num-saldo').textContent = formatarMoeda(saldoFinal);
     document.getElementById('num-risco').textContent = dados.fatoresRisco;
 
-    // Barra de composição
     if (totalItens > 0) {
         document.getElementById('fatia-natural').style.width = (dados.itensNatural / totalItens * 100) + '%';
         document.getElementById('fatia-processado').style.width = (dados.itensProcessado / totalItens * 100) + '%';
         document.getElementById('fatia-ultra').style.width = (dados.itensUltra / totalItens * 100) + '%';
     }
 
-    // Lista de itens
+    if (dados.essenciaisFaltando && dados.essenciaisFaltando.length > 0) {
+        const blocoFaltando = document.getElementById('bloco-faltando');
+        const listaFaltando = document.getElementById('lista-faltando');
+        blocoFaltando.style.display = 'block';
+        dados.essenciaisFaltando.forEach(nomeAlimento => {
+            const li = document.createElement('li');
+            li.textContent = nomeAlimento;
+            listaFaltando.appendChild(li);
+        });
+    }
+
     const listaEl = document.getElementById('lista-itens-final');
     const rotulos = { natural: 'In natura', processado: 'Processado', ultraprocessado: 'Ultraprocessado' };
+
+    if (dados.carrinho.length === 0) {
+        listaEl.innerHTML = '<p style="font-size:0.85rem; color:var(--tinta-suave);">Nenhum item foi colocado no carrinho.</p>';
+    }
 
     dados.carrinho.forEach(item => {
         const linha = document.createElement('div');

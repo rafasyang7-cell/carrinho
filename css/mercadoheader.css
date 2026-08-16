@@ -1,6 +1,9 @@
 /* ===== Header - Mercado (com recibo fixo no canto) ===== */
 .topo {
-    background: var(--verde-escuro);
+    background:
+        repeating-linear-gradient(-45deg,
+            var(--verde-escuro) 0px, var(--verde-escuro) 26px,
+            var(--verde-medio) 26px, var(--verde-medio) 52px);
     color: #fff;
     padding: 16px 0;
     border-bottom: 6px solid var(--trigo);
@@ -21,6 +24,10 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    background: rgba(27, 67, 50, 0.55);
+    padding: 6px 14px 6px 6px;
+    border-radius: 100px;
+    backdrop-filter: blur(1px);
 }
 
 .marca .icone-marca {
