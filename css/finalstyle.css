@@ -66,3 +66,40 @@ button {
         transition-duration: 0.001ms !important;
     }
 }
+
+/* ----- Rodapé ----- */
+.rodape-jogo {
+    background: var(--verde-escuro);
+    color: var(--verde-claro);
+    padding: 16px 0;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+.rodape-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.rodape-fontes {
+    opacity: 0.8;
+    font-size: 0.75rem;
+}
+
+@media (max-width: 760px) {
+    .rodape-conteudo {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
