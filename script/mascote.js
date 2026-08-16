@@ -1,22 +1,47 @@
 // ===== Mascote (bonequinho de reações) =====
 // Compartilhado pelas telas inicial, mercado e final.
+//
+// AS IMAGENS FICAM DIRETO DENTRO DE image/mascote/ (sem subpastas), com estes nomes exatos:
+//
+//   Feminino:      fem neutro.png   fem feliz.png   fem preocupada.png   fem triste.png   fem chocada.png
+//   Masculino:     masc neutro.png  masc feliz.png  masc preocupado.png  masc triste.png  masc chocado.png
+//   Não binário:   nao neutro.png   nao feliz.png   nao preocupado.png   nao triste.png   nao chocado.png
+//
+// Se algum arquivo estiver faltando ou com nome diferente, o código desenha um rosto
+// simples (SVG) no lugar automaticamente — já com cabelo/estilo diferente por gênero.
 
 const MASCOTE_ESTADOS = ['neutro', 'feliz', 'preocupado', 'triste', 'chocado'];
+
+// Nome exato do arquivo dentro de image/mascote/ para cada gênero + estado
+const ARQUIVOS_MASCOTE = {
+  feminino: {
+    neutro: 'fem neutro.png',
+    feliz: 'fem feliz.png',
+    preocupado: 'fem preocupada.png',
+    triste: 'fem triste.png',
+    chocado: 'fem chocada.png',
+  },
+  masculino: {
+    neutro: 'masc neutro.png',
+    feliz: 'masc feliz.png',
+    preocupado: 'masc preocupado.png',
+    triste: 'masc triste.png',
+    chocado: 'masc chocado.png',
+  },
+  'nao-binario': {
+    neutro: 'nao neutro.png',
+    feliz: 'nao feliz.png',
+    preocupado: 'nao preocupado.png',
+    triste: 'nao triste.png',
+    chocado: 'nao chocado.png',
+  },
+};
 
 function obterGeneroPersonagem() {
   return localStorage.getItem('carrinhoReal_genero') || 'nao-binario';
 }
 
-// Mapeia o gênero escolhido para o prefixo correto do arquivo de imagem
-function obterPrefixoArquivo(genero) {
-  switch (genero) {
-    case 'masculino': return 'masc';
-    case 'feminino': return 'fem';
-    case 'nao-binario': default: return 'nao';
-  }
-}
-
-// Desenha um rosto simples em SVG para cada estado / gênero (fallback caso a imagem não carregue)
+// Desenha um rosto simples em SVG para cada estado / gênero (usado só se a imagem não carregar)
 function svgRostoMascote(estado, genero) {
   const bocas = {
     neutro: '<path d="M 40,68 Q 55,70 70,68" stroke="#22333B" stroke-width="3.5" stroke-linecap="round" fill="none"/>',
@@ -39,12 +64,10 @@ function svgRostoMascote(estado, genero) {
     triste: '<path d="M 38,64 Q 34,72 37,78" stroke="#5FA8D3" stroke-width="2.5" stroke-linecap="round" fill="none"/>',
     chocado: '<text x="90" y="34" font-size="20" fill="#E76F51" font-family="Arial, sans-serif" font-weight="bold">!</text>'
   };
-  const corFundo = {
-    neutro: '#F6C9A0', feliz: '#F8D3AC', preocupado: '#F3C398', triste: '#EFC094', chocado: '#F0BE8E'
-  };
+  const corFundo = { neutro: '#F6C9A0', feliz: '#F8D3AC', preocupado: '#F3C398', triste: '#EFC094', chocado: '#F0BE8E' };
 
   const cabelos = {
-    masculino: '<path d="M 18,48 Q 20,10 55,10 Q 90,10 92,48 Q 80,30 55,28 Q 30,30 18,48 Z" fill="#4A3728"/><rect x="40" y="82" width="30" height="4" rx="2" fill="#4A3728" opacity="0"/>',
+    masculino: '<path d="M 18,48 Q 20,10 55,10 Q 90,10 92,48 Q 80,30 55,28 Q 30,30 18,48 Z" fill="#4A3728"/>',
     feminino: '<path d="M 12,64 Q 8,8 55,6 Q 102,8 98,64 Q 96,32 78,18 Q 55,42 32,18 Q 14,32 12,64 Z" fill="#5C3A21"/><circle cx="18" cy="66" r="3.5" fill="#E9C46A"/><circle cx="92" cy="66" r="3.5" fill="#E9C46A"/>',
     'nao-binario': '<path d="M 16,52 Q 14,12 55,10 Q 96,12 94,52 Q 90,22 65,16 Q 55,30 45,16 Q 20,22 16,52 Z" fill="#3D5A45"/><rect x="30" y="20" width="50" height="6" rx="3" fill="#E9C46A"/>'
   };
@@ -71,6 +94,7 @@ function svgRostoMascote(estado, genero) {
  * Atualiza o mascote dentro do elemento #mascote-caixa.
  * @param {string} estado - neutro | feliz | preocupado | triste | chocado
  * @param {string} [generoForcado] - opcional: usa esse gênero em vez de reler o localStorage
+ *   (evita problemas de sincronismo logo após o usuário escolher o gênero).
  */
 function atualizarMascote(estado, generoForcado) {
   const caixa = document.getElementById('mascote-caixa');
@@ -78,21 +102,17 @@ function atualizarMascote(estado, generoForcado) {
   if (!MASCOTE_ESTADOS.includes(estado)) estado = 'neutro';
 
   const genero = generoForcado || obterGeneroPersonagem();
-  const prefixo = obterPrefixoArquivo(genero);
-
-  // Tratamento específico para o estado "chocado" que no arquivo está como "chocada" (feminino)
-  let sufixoEstado = estado;
-  if (genero === 'feminino' && estado === 'chocado') {
-    sufixoEstado = 'chocada';
-  }
-
   caixa.dataset.estadoAtual = estado;
   caixa.dataset.generoAtual = genero;
 
+  const nomesPorGenero = ARQUIVOS_MASCOTE[genero] || ARQUIVOS_MASCOTE['nao-binario'];
+  const nomeArquivo = nomesPorGenero[estado];
+  const caminhoImagem = 'image/mascote/' + encodeURIComponent(nomeArquivo);
+
   caixa.innerHTML = `
     <div class="mascote-visual">
-      <img src="image/mascote/${prefixo} ${sufixoEstado}.png" alt="Reação do personagem"
-           onerror="this.style.display='none'"
+      <img src="${caminhoImagem}" alt="Reação do personagem"
+           onerror="this.remove()"
            onload="this.nextElementSibling.style.display='none'">
       ${svgRostoMascote(estado, genero)}
     </div>

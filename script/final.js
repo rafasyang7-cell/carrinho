@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dadosBrutos = localStorage.getItem('carrinhoReal_resultado');
 
     if (!dadosBrutos) {
-        window.location.href = 'inicial.html';
+        window.location.href = 'index.html';
         return;
     }
 

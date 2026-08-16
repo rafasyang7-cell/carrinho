@@ -22,8 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
             botoesGenero.forEach(b => b.classList.remove('selecionada'));
             botao.classList.add('selecionada');
             generoEscolhido = botao.dataset.genero;
-            // Passamos o gênero direto (generoForcado) para não depender do localStorage,
-            // que só é gravado no envio do formulário.
+
+            // Salva imediatamente (não só no envio do formulário), para garantir que o
+            // gênero escolhido não se perca se a pessoa recarregar ou pular alguma etapa.
+            localStorage.setItem('carrinhoReal_genero', generoEscolhido);
+
+            // Passamos o gênero direto (generoForcado) também, para a prévia atualizar na hora.
             atualizarMascote('feliz', generoEscolhido);
         });
     });
