@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         mensagemEl.textContent =
             `Você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)} e garantiu a ` +
-            `quantidade completa da cesta básica essencial — o suficiente para ` +
+            `quantidade completa da cesta básica essencial, foi apenas suficiente para ` +
             `vencer a simulação. O orçamento não deu pra fechar tudo o mais recomendado, mas o básico da sua ` +
             `família ficou garantido.`;
     }
