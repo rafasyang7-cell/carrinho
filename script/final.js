@@ -1,6 +1,7 @@
 // ===== Tela Final: GAME OVER =====
-// Só chegamos aqui quando pelo menos 1 dos 6 alimentos essenciais (arroz, feijão
-// carioca, ovos, óleo, cenoura, banana) não foi comprado na quantidade completa.
+// Só chegamos aqui quando pelo menos 1 dos 9 requisitos essenciais (arroz, feijão,
+// macarrão, farinha de mandioca, uma proteína, açúcar, café, sal e leite) não foi
+// completado na quantidade mínima.
 // Se os 6 estiverem completos, quem decide o destino é o mercado.js, que manda
 // para vitoria.html em vez desta tela.
 document.addEventListener('DOMContentLoaded', () => {
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // O que a pessoa deveria ter colocado no carrinho, e a quantidade certa
-    // (só os 6 essenciais — é exatamente o motivo do GAME OVER)
+    // (só os requisitos essenciais — é exatamente o motivo do GAME OVER)
     if (obrigatoriosFaltando.length > 0) {
         const blocoFaltando = document.getElementById('bloco-faltando');
         const listaFaltando = document.getElementById('lista-faltando');

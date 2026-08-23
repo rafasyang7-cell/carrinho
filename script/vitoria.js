@@ -1,6 +1,7 @@
 // ===== Tela Final: VITÓRIA =====
-// Só chegamos aqui quando os 6 alimentos essenciais (arroz, feijão carioca, ovos,
-// óleo, cenoura e banana) foram comprados na quantidade completa. Quem decide isso
+// Só chegamos aqui quando os 9 requisitos essenciais (arroz, feijão, macarrão,
+// farinha de mandioca, uma proteína, açúcar, café, sal e leite) foram completados
+// na quantidade mínima. Quem decide isso
 // é o mercado.js — se faltar algum deles, vai para final.html (GAME OVER) em vez desta.
 document.addEventListener('DOMContentLoaded', () => {
     const nome = localStorage.getItem('carrinhoReal_nome') || 'jogador(a)';
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const totalItens = dados.itensNatural + dados.itensProcessado + dados.itensUltra;
     const saldoFinal = dados.orcamentoTotal - dados.gastoTotal;
-    // "cesta completa" = nenhum alimento com mínimo ficou de fora (não só os 6 essenciais).
+    // "cesta completa" = nenhum alimento com mínimo ficou de fora (não só os essenciais).
     const cestaCompleta = !dados.essenciaisFaltando || dados.essenciaisFaltando.length === 0;
     const usouUltraprocessado = dados.itensUltra > 0;
 
@@ -43,13 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (cestaCompleta) {
         mensagemEl.textContent =
             `Você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)} e conseguiu ` +
-            `bater a quantidade recomendada de todos os alimentos com mínimo, incluindo os 6 essenciais. ` +
+            `bater a quantidade recomendada de todos os alimentos com mínimo, incluindo os essenciais. ` +
             `Ainda assim, sobrou espaço no carrinho para algum ultraprocessado — vale reparar como pequenas ` +
             `trocas mudam o equilíbrio da cesta.`;
     } else {
         mensagemEl.textContent =
             `Você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)} e garantiu a ` +
-            `quantidade completa dos 6 alimentos essenciais (um de cada grupo alimentar) — o suficiente para ` +
+            `quantidade completa da cesta básica essencial — o suficiente para ` +
             `vencer a simulação. O orçamento não deu pra fechar tudo o mais recomendado, mas o básico da sua ` +
             `família ficou garantido.`;
     }

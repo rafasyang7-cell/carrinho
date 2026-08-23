@@ -7,6 +7,11 @@
 // da mesma seção) OU a quantidade mínima completa — nunca uma quantidade
 // "pela metade". Alimentos processados/ultraprocessados não têm mínimo.
 //
+// FOTOS: cada alimento tenta carregar image/comida/<id>.jpg automaticamente.
+// Enquanto o arquivo não existir, aparece um ícone do Font Awesome no lugar.
+// Basta salvar a foto com o nome certo (ex: image/comida/arroz.jpg) que ela
+// substitui o ícone sozinha.
+//
 // As seções abaixo misturam, de propósito, opções in natura, processadas e
 // ultraprocessadas dentro do MESMO grupo alimentar — assim dá pra comparar e
 // trocar um alimento saudável por um mais barato dentro da mesma categoria.
@@ -19,13 +24,15 @@ const SECOES = [
         nome: 'Grãos, Massas e Pães',
         icone: 'fa-wheat-awn',
         alimentos: [
-            { id: 'arroz', nome: 'Arroz', unidade: 'pacote 1kg', preco: 6.20, tipo: 'natural', icone: 'fa-bowl-rice', minimoFamilia: 6, minimoTexto: '6kg de arroz' },
-            { id: 'feijao-carioca', nome: 'Feijão carioca', unidade: 'pacote 1kg', preco: 9.80, tipo: 'natural', icone: 'fa-plate-wheat', minimoFamilia: 4, minimoTexto: '4kg de feijão' },
-            { id: 'feijao-preto', nome: 'Feijão preto', unidade: 'pacote 1kg', preco: 9.50, tipo: 'natural', icone: 'fa-mortar-pestle', minimoFamilia: 4, minimoTexto: '4kg de feijão' },
+            { id: 'arroz', nome: 'Arroz', unidade: 'pacote 1kg', preco: 6.20, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 6, minimoTexto: '6kg de arroz' },
+            { id: 'feijao-carioca', nome: 'Feijão carioca', unidade: 'pacote 1kg', preco: 9.80, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 3, minimoTexto: '3kg de feijão' },
+            { id: 'feijao-preto', nome: 'Feijão preto', unidade: 'pacote 1kg', preco: 9.50, tipo: 'natural', icone: 'fa-mortar-pestle', minimoFamilia: 3, minimoTexto: '3kg de feijão' },
+            { id: 'macarrao', nome: 'Macarrão', unidade: 'pacote 500g', preco: 4.50, tipo: 'processado', icone: 'fa-bowl-food', minimoFamilia: 2, minimoTexto: '2 pacotes de macarrão' },
+            { id: 'farinha-mandioca', nome: 'Farinha de mandioca', unidade: 'pacote 1kg', preco: 5.50, tipo: 'natural', icone: 'fa-jar', minimoFamilia: 1, minimoTexto: '1kg de farinha de mandioca' },
             { id: 'milho', nome: 'Milho verde (espiga)', unidade: 'pacote com 3', preco: 7.00, tipo: 'natural', icone: 'fa-wheat-awn', minimoFamilia: 2, minimoTexto: '2 pacotes de milho verde' },
-            { id: 'pao-frances', nome: 'Pão francês', unidade: '10 unidades', preco: 9.00, tipo: 'processado', icone: 'fa-mug-saucer', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'pao-frances', nome: 'Pão francês', unidade: '10 unidades', preco: 9.00, tipo: 'processado', icone: 'fa-bread-slice', minimoFamilia: 0, minimoTexto: '' },
             { id: 'pao-forma', nome: 'Pão de forma', unidade: 'pacote', preco: 10.50, tipo: 'processado', icone: 'fa-bread-slice', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'miojo', nome: 'Macarrão instantâneo (miojo)', unidade: 'pacote', preco: 2.50, tipo: 'ultraprocessado', icone: 'fa-bowl-food', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'miojo', nome: 'Macarrão instantâneo (miojo)', unidade: 'pacote', preco: 2.50, tipo: 'ultraprocessado', icone: 'fa-utensils', minimoFamilia: 0, minimoTexto: '' },
             { id: 'biscoito', nome: 'Biscoito recheado', unidade: 'pacote', preco: 5.50, tipo: 'ultraprocessado', icone: 'fa-cookie', minimoFamilia: 0, minimoTexto: '' },
             { id: 'salgadinho', nome: 'Salgadinho (chips)', unidade: 'pacote', preco: 7.50, tipo: 'ultraprocessado', icone: 'fa-stroopwafel', minimoFamilia: 0, minimoTexto: '' },
         ]
@@ -39,7 +46,7 @@ const SECOES = [
             { id: 'carne', nome: 'Carne bovina (acém/patinho)', unidade: '1kg', preco: 34.90, tipo: 'natural', icone: 'fa-cow', minimoFamilia: 3, minimoTexto: '3kg de carne bovina' },
             { id: 'frango', nome: 'Frango (peito/coxa)', unidade: '1kg', preco: 16.90, tipo: 'natural', icone: 'fa-drumstick-bite', minimoFamilia: 3, minimoTexto: '3kg de frango' },
             { id: 'peixe', nome: 'Peixe fresco (tilápia)', unidade: '1kg', preco: 22.00, tipo: 'natural', icone: 'fa-fish', minimoFamilia: 2, minimoTexto: '2kg de peixe' },
-            { id: 'atum', nome: 'Atum enlatado', unidade: 'lata', preco: 7.50, tipo: 'processado', icone: 'fa-fish-fins', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'atum', nome: 'Atum enlatado', unidade: 'lata', preco: 7.50, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
             { id: 'sardinha', nome: 'Sardinha enlatada', unidade: 'lata', preco: 6.20, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
             { id: 'queijo', nome: 'Queijo mussarela', unidade: '500g', preco: 24.00, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 0, minimoTexto: '' },
             { id: 'presunto', nome: 'Presunto fatiado', unidade: '200g', preco: 8.50, tipo: 'ultraprocessado', icone: 'fa-layer-group', minimoFamilia: 0, minimoTexto: '' },
@@ -53,7 +60,7 @@ const SECOES = [
         nome: 'Gorduras e Óleos',
         icone: 'fa-jar',
         alimentos: [
-            { id: 'abacate', nome: 'Abacate', unidade: 'unidade (~500g)', preco: 6.00, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 2, minimoTexto: '2 abacates' },
+            { id: 'abacate', nome: 'Abacate', unidade: 'unidade (~500g)', preco: 6.00, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 2, minimoTexto: '2 abacates' },
             { id: 'oleo', nome: 'Óleo de soja', unidade: 'garrafa 900ml', preco: 8.20, tipo: 'natural', icone: 'fa-wine-bottle', minimoFamilia: 1, minimoTexto: '1 garrafa de óleo' },
             { id: 'manteiga', nome: 'Manteiga', unidade: 'pote 200g', preco: 13.50, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 1, minimoTexto: '1 pote de manteiga' },
             { id: 'margarina', nome: 'Margarina', unidade: 'pote 500g', preco: 7.50, tipo: 'ultraprocessado', icone: 'fa-box', minimoFamilia: 0, minimoTexto: '' },
@@ -82,6 +89,17 @@ const SECOES = [
         ]
     },
     {
+        id: 'mercearia',
+        nome: 'Mercearia e Laticínios',
+        icone: 'fa-boxes-stacked',
+        alimentos: [
+            { id: 'acucar', nome: 'Açúcar', unidade: 'pacote 1kg', preco: 4.20, tipo: 'processado', icone: 'fa-cubes', minimoFamilia: 2, minimoTexto: '2kg de açúcar' },
+            { id: 'cafe', nome: 'Café', unidade: 'pacote 500g', preco: 12.50, tipo: 'processado', icone: 'fa-mug-hot', minimoFamilia: 1, minimoTexto: '1 pacote de café' },
+            { id: 'sal', nome: 'Sal', unidade: 'pacote 1kg', preco: 2.50, tipo: 'processado', icone: 'fa-mortar-pestle', minimoFamilia: 1, minimoTexto: '1kg de sal' },
+            { id: 'leite', nome: 'Leite', unidade: 'caixa 1L', preco: 5.20, tipo: 'natural', icone: 'fa-glass-water', minimoFamilia: 3, minimoTexto: '3 litros de leite' },
+        ]
+    },
+    {
         id: 'bebidas',
         nome: 'Bebidas',
         icone: 'fa-bottle-water',
@@ -93,6 +111,10 @@ const SECOES = [
     },
 ];
 
+// Seção especial "Alimentos Obrigatórios": reúne, num só lugar, todo alimento que
+// tem quantidade mínima para a família (vindo de qualquer categoria acima). Os cartões
+// aqui são os MESMOS objetos/estado das seções originais — mexer na quantidade aqui
+// atualiza a categoria de origem também, e vice-versa.
 const SECAO_OBRIGATORIOS = {
     id: 'obrigatorios',
     nome: 'Alimentos Obrigatórios',
@@ -100,15 +122,73 @@ const SECAO_OBRIGATORIOS = {
     alimentos: SECOES.flatMap(secao => secao.alimentos.filter(a => a.minimoFamilia > 0)),
 };
 
-const IDS_ESSENCIAIS_PARA_VITORIA = ['arroz', 'feijao-carioca', 'ovos', 'oleo', 'cenoura', 'banana'];
+// A "cesta básica mínima" que precisa estar completa pra vencer a simulação.
+// A maioria é um alimento fixo — mas dois itens aceitam qualquer opção da lista
+// ("ou"): qualquer um dos feijões, e qualquer uma das proteínas (o ovo é o mais
+// barato e por isso o caminho mais viável dentro do orçamento, mas carne, frango
+// ou peixe também contam se a pessoa preferir/puder pagar).
+const REQUISITOS_ESSENCIAIS = [
+    'arroz',
+    ['feijao-carioca', 'feijao-preto'],
+    'macarrao',
+    'farinha-mandioca',
+    ['ovos', 'carne', 'frango', 'peixe'],
+    'acucar',
+    'cafe',
+    'sal',
+    'leite',
+];
+
+function obterAlimentoPorId(id) {
+    for (const secao of SECOES) {
+        const achou = secao.alimentos.find(a => a.id === id);
+        if (achou) return achou;
+    }
+    return null;
+}
+
+function requisitoSatisfeito(requisito) {
+    const ids = Array.isArray(requisito) ? requisito : [requisito];
+    return ids.some(id => {
+        const alimento = obterAlimentoPorId(id);
+        return alimento && (carrinho[alimento.id] || 0) >= alimento.minimoFamilia;
+    });
+}
+
+function descreverRequisitoFaltante(requisito) {
+    const ids = Array.isArray(requisito) ? requisito : [requisito];
+    const alimentos = ids.map(obterAlimentoPorId).filter(Boolean);
+
+    if (alimentos.length === 1) {
+        return { nome: alimentos[0].nome, minimoTexto: alimentos[0].minimoTexto };
+    }
+
+    // Grupos com opção ("ou"): mensagem curta e direta, sem listar cada alternativa.
+    if (ids.includes('feijao-carioca')) {
+        return { nome: 'Feijão', minimoTexto: alimentos[0].minimoTexto };
+    }
+    if (ids.includes('ovos')) {
+        return { nome: 'Ovos e carnes', minimoTexto: 'com proteína' };
+    }
+
+    // Reserva, caso outro grupo com opções seja adicionado no futuro.
+    const nomes = alimentos.map(a => a.nome).join(' e ');
+    return { nome: nomes, minimoTexto: 'com uma das opções dessa categoria' };
+}
+
+// IDs "achatados" de todos os alimentos que fazem parte de algum requisito essencial
+// — usado só pra desenhar a fitinha "Essencial p/ vencer" nos cartões.
+const IDS_ESSENCIAIS_PARA_VITORIA = REQUISITOS_ESSENCIAIS.flatMap(r => Array.isArray(r) ? r : [r]);
 
 function ehEssencialParaVitoria(alimento) {
     return IDS_ESSENCIAIS_PARA_VITORIA.includes(alimento.id);
 }
 
+// Lista usada para montar as abas/telas (a seção de obrigatórios aparece primeiro).
+// O cálculo de gasto/resultado continua usando só SECOES, pra não contar nada em dobro.
 const SECOES_PARA_EXIBIR = [SECAO_OBRIGATORIOS, ...SECOES];
 
-const carrinho = {};
+const carrinho = {}; // { alimentoId: quantidade }
 
 const formatarMoeda = (valor) =>
     valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -240,7 +320,7 @@ function montarSecoes() {
         <h2><i class="fa-solid ${secao.icone}"></i> ${secao.nome}</h2>
         ${temMinimo ? `<span class="meta-minimo" data-meta="${secao.id}"></span>` : ''}
       </div>
-      ${ehObrigatorios ? `<p class="descricao-obrigatorios"><i class="fa-solid fa-circle-info"></i> Estes são os alimentos com quantidade mínima para nutrir sua família de 4 pessoas. Os marcados com <i class="fa-solid fa-star"></i> <strong>Essencial p/ vencer</strong> precisam estar completos para você vencer a simulação — os demais são recomendados, mas você pode zerá-los e usar uma opção alternativa da seção correspondente.</p>` : ''}
+      ${ehObrigatorios ? `<p class="descricao-obrigatorios"><i class="fa-solid fa-circle-info"></i> Estes são os alimentos com quantidade mínima para nutrir sua família de 4 pessoas. Os marcados com <i class="fa-solid fa-star"></i> <strong>Essencial p/ vencer</strong> fazem parte da cesta básica que precisa estar completa pra você vencer a simulação (feijão e proteína aceitam qualquer opção da categoria) — os demais são recomendados, mas você pode zerá-los e usar uma opção alternativa da seção correspondente.</p>` : ''}
       <div class="grade-alimentos" data-grade="${secao.id}"></div>
     `;
 
@@ -303,6 +383,7 @@ function atualizarTudo() {
     atualizarCartoes();
 }
 
+// ----- Toast de aviso -----
 let timeoutToast = null;
 function mostrarToast(mensagem) {
     let toast = document.getElementById('toast-aviso');
@@ -344,8 +425,7 @@ function finalizarCompra() {
     let itensNatural = 0, itensProcessado = 0, itensUltra = 0;
     const categoriasUltraCompradas = new Set();
     const listaCarrinho = [];
-    const essenciaisFaltando = [];
-    const obrigatoriosFaltando = [];
+    const essenciaisFaltando = [];       // qualquer item com mínimo que ficou zerado (informativo)
 
     SECOES.forEach(secao => {
         secao.alimentos.forEach(alimento => {
@@ -360,9 +440,6 @@ function finalizarCompra() {
 
             if (alimento.minimoFamilia > 0 && qtd < alimento.minimoFamilia) {
                 essenciaisFaltando.push({ nome: alimento.nome, minimoTexto: alimento.minimoTexto });
-                if (ehEssencialParaVitoria(alimento)) {
-                    obrigatoriosFaltando.push({ nome: alimento.nome, minimoTexto: alimento.minimoTexto });
-                }
             }
         });
     });
@@ -375,20 +452,19 @@ function finalizarCompra() {
         itensUltra,
         fatoresRisco: categoriasUltraCompradas.size,
         essenciaisFaltando,
-        obrigatoriosFaltando,
+        obrigatoriosFaltando: REQUISITOS_ESSENCIAIS.filter(req => !requisitoSatisfeito(req)).map(descreverRequisitoFaltante),
         carrinho: listaCarrinho
     };
 
     localStorage.setItem('carrinhoReal_resultado', JSON.stringify(resultado));
 
-    window.location.href = (obrigatoriosFaltando.length === 0) ? 'vitoria.html' : 'final.html';
+    // VITÓRIA: todos os 9 requisitos essenciais foram cumpridos (alguns com opção
+    // "ou"). GAME OVER: faltou completar pelo menos um deles.
+    window.location.href = (resultado.obrigatoriosFaltando.length === 0) ? 'vitoria.html' : 'final.html';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     montarSecoes();
     atualizarTudo();
-    const btnFinalizar = document.getElementById('btn-finalizar');
-    if (btnFinalizar) {
-        btnFinalizar.addEventListener('click', tentarFinalizar);
-    }
+    document.getElementById('btn-finalizar').addEventListener('click', tentarFinalizar);
 });
