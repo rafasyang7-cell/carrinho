@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('titulo-saudacao').textContent = `Olá, ${nome}!`;
 
     const SALARIO_BRUTO = 1621.00;
-    const ORCAMENTO_ALIMENTACAO = 248.83; // 1621 - (121.58+97.26+800+120+100+33.33+100)
+    const ORCAMENTO_ALIMENTACAO = 148.83; // 1621 - (121.58+97.26+800+120+100+33.33+100+50+50)
 
     const itens = Array.from(document.querySelectorAll('.item-recibo'));
     const saldoParcialEl = document.getElementById('saldo-parcial');

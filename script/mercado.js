@@ -7,16 +7,11 @@
 // da mesma seção) OU a quantidade mínima completa — nunca uma quantidade
 // "pela metade". Alimentos processados/ultraprocessados não têm mínimo.
 //
-// FOTOS: cada alimento tenta carregar image/comida/<id>.jpg automaticamente.
-// Enquanto o arquivo não existir, aparece um ícone do Font Awesome no lugar.
-// Basta salvar a foto com o nome certo (ex: image/comida/arroz.jpg) que ela
-// substitui o ícone sozinha.
-//
 // As seções abaixo misturam, de propósito, opções in natura, processadas e
 // ultraprocessadas dentro do MESMO grupo alimentar — assim dá pra comparar e
 // trocar um alimento saudável por um mais barato dentro da mesma categoria.
 
-const ORCAMENTO_TOTAL = parseFloat(localStorage.getItem('carrinhoReal_orcamentoAlimentacao')) || 248.83;
+const ORCAMENTO_TOTAL = parseFloat(localStorage.getItem('carrinhoReal_orcamentoAlimentacao')) || 148.83;
 
 const SECOES = [
     {
@@ -24,13 +19,13 @@ const SECOES = [
         nome: 'Grãos, Massas e Pães',
         icone: 'fa-wheat-awn',
         alimentos: [
-            { id: 'arroz', nome: 'Arroz', unidade: 'pacote 1kg', preco: 6.20, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 6, minimoTexto: '6kg de arroz' },
-            { id: 'feijao-carioca', nome: 'Feijão carioca', unidade: 'pacote 1kg', preco: 9.80, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 4, minimoTexto: '4kg de feijão' },
+            { id: 'arroz', nome: 'Arroz', unidade: 'pacote 1kg', preco: 6.20, tipo: 'natural', icone: 'fa-bowl-rice', minimoFamilia: 6, minimoTexto: '6kg de arroz' },
+            { id: 'feijao-carioca', nome: 'Feijão carioca', unidade: 'pacote 1kg', preco: 9.80, tipo: 'natural', icone: 'fa-plate-wheat', minimoFamilia: 4, minimoTexto: '4kg de feijão' },
             { id: 'feijao-preto', nome: 'Feijão preto', unidade: 'pacote 1kg', preco: 9.50, tipo: 'natural', icone: 'fa-mortar-pestle', minimoFamilia: 4, minimoTexto: '4kg de feijão' },
             { id: 'milho', nome: 'Milho verde (espiga)', unidade: 'pacote com 3', preco: 7.00, tipo: 'natural', icone: 'fa-wheat-awn', minimoFamilia: 2, minimoTexto: '2 pacotes de milho verde' },
-            { id: 'pao-frances', nome: 'Pão francês', unidade: '10 unidades', preco: 9.00, tipo: 'processado', icone: 'fa-bread-slice', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'pao-frances', nome: 'Pão francês', unidade: '10 unidades', preco: 9.00, tipo: 'processado', icone: 'fa-mug-saucer', minimoFamilia: 0, minimoTexto: '' },
             { id: 'pao-forma', nome: 'Pão de forma', unidade: 'pacote', preco: 10.50, tipo: 'processado', icone: 'fa-bread-slice', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'miojo', nome: 'Macarrão instantâneo (miojo)', unidade: 'pacote', preco: 2.50, tipo: 'ultraprocessado', icone: 'fa-utensils', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'miojo', nome: 'Macarrão instantâneo (miojo)', unidade: 'pacote', preco: 2.50, tipo: 'ultraprocessado', icone: 'fa-bowl-food', minimoFamilia: 0, minimoTexto: '' },
             { id: 'biscoito', nome: 'Biscoito recheado', unidade: 'pacote', preco: 5.50, tipo: 'ultraprocessado', icone: 'fa-cookie', minimoFamilia: 0, minimoTexto: '' },
             { id: 'salgadinho', nome: 'Salgadinho (chips)', unidade: 'pacote', preco: 7.50, tipo: 'ultraprocessado', icone: 'fa-stroopwafel', minimoFamilia: 0, minimoTexto: '' },
         ]
@@ -44,7 +39,7 @@ const SECOES = [
             { id: 'carne', nome: 'Carne bovina (acém/patinho)', unidade: '1kg', preco: 34.90, tipo: 'natural', icone: 'fa-cow', minimoFamilia: 3, minimoTexto: '3kg de carne bovina' },
             { id: 'frango', nome: 'Frango (peito/coxa)', unidade: '1kg', preco: 16.90, tipo: 'natural', icone: 'fa-drumstick-bite', minimoFamilia: 3, minimoTexto: '3kg de frango' },
             { id: 'peixe', nome: 'Peixe fresco (tilápia)', unidade: '1kg', preco: 22.00, tipo: 'natural', icone: 'fa-fish', minimoFamilia: 2, minimoTexto: '2kg de peixe' },
-            { id: 'atum', nome: 'Atum enlatado', unidade: 'lata', preco: 7.50, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'atum', nome: 'Atum enlatado', unidade: 'lata', preco: 7.50, tipo: 'processado', icone: 'fa-fish-fins', minimoFamilia: 0, minimoTexto: '' },
             { id: 'sardinha', nome: 'Sardinha enlatada', unidade: 'lata', preco: 6.20, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
             { id: 'queijo', nome: 'Queijo mussarela', unidade: '500g', preco: 24.00, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 0, minimoTexto: '' },
             { id: 'presunto', nome: 'Presunto fatiado', unidade: '200g', preco: 8.50, tipo: 'ultraprocessado', icone: 'fa-layer-group', minimoFamilia: 0, minimoTexto: '' },
@@ -58,7 +53,7 @@ const SECOES = [
         nome: 'Gorduras e Óleos',
         icone: 'fa-jar',
         alimentos: [
-            { id: 'abacate', nome: 'Abacate', unidade: 'unidade (~500g)', preco: 6.00, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 2, minimoTexto: '2 abacates' },
+            { id: 'abacate', nome: 'Abacate', unidade: 'unidade (~500g)', preco: 6.00, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 2, minimoTexto: '2 abacates' },
             { id: 'oleo', nome: 'Óleo de soja', unidade: 'garrafa 900ml', preco: 8.20, tipo: 'natural', icone: 'fa-wine-bottle', minimoFamilia: 1, minimoTexto: '1 garrafa de óleo' },
             { id: 'manteiga', nome: 'Manteiga', unidade: 'pote 200g', preco: 13.50, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 1, minimoTexto: '1 pote de manteiga' },
             { id: 'margarina', nome: 'Margarina', unidade: 'pote 500g', preco: 7.50, tipo: 'ultraprocessado', icone: 'fa-box', minimoFamilia: 0, minimoTexto: '' },
@@ -98,7 +93,22 @@ const SECOES = [
     },
 ];
 
-const carrinho = {}; // { alimentoId: quantidade }
+const SECAO_OBRIGATORIOS = {
+    id: 'obrigatorios',
+    nome: 'Alimentos Obrigatórios',
+    icone: 'fa-star',
+    alimentos: SECOES.flatMap(secao => secao.alimentos.filter(a => a.minimoFamilia > 0)),
+};
+
+const IDS_ESSENCIAIS_PARA_VITORIA = ['arroz', 'feijao-carioca', 'ovos', 'oleo', 'cenoura', 'banana'];
+
+function ehEssencialParaVitoria(alimento) {
+    return IDS_ESSENCIAIS_PARA_VITORIA.includes(alimento.id);
+}
+
+const SECOES_PARA_EXIBIR = [SECAO_OBRIGATORIOS, ...SECOES];
+
+const carrinho = {};
 
 const formatarMoeda = (valor) =>
     valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -135,17 +145,19 @@ function podeAdicionar(alimento) {
     return (gasto + alimento.preco) <= ORCAMENTO_TOTAL + 0.001;
 }
 
-function criarCartaoAlimento(alimento) {
+function criarCartaoAlimento(alimento, destacarEssencial) {
     const div = document.createElement('div');
     div.className = 'cartao-alimento';
     div.dataset.id = alimento.id;
 
     const rotulos = { natural: 'In natura', processado: 'Processado', ultraprocessado: 'Ultraprocessado' };
+    const ehEssencial = !!destacarEssencial && ehEssencialParaVitoria(alimento);
 
     div.innerHTML = `
+    ${ehEssencial ? `<span class="fita-essencial"><i class="fa-solid fa-star"></i> Essencial p/ vencer</span>` : ''}
     <div class="foto-alimento">
       <i class="fa-solid ${alimento.icone} icone-alimento"></i>
-      <img src="image/comida/${alimento.id}.jpg" alt="${alimento.nome}" onerror="this.remove()">
+      <img src="image/mascote/comida/${alimento.id}.jpg" alt="${alimento.nome}" onerror="this.remove()">
     </div>
     <span class="rotulo-tipo ${alimento.tipo}">${rotulos[alimento.tipo]}</span>
     <h4>${alimento.nome}</h4>
@@ -207,12 +219,13 @@ function montarSecoes() {
     const abasEl = document.getElementById('abas-secoes');
     const secoesEl = document.getElementById('secoes-mercado');
 
-    SECOES.forEach((secao, index) => {
+    SECOES_PARA_EXIBIR.forEach((secao, index) => {
         const temMinimo = secao.alimentos.some(a => a.minimoFamilia > 0);
+        const ehObrigatorios = secao.id === 'obrigatorios';
 
         const aba = document.createElement('button');
         aba.type = 'button';
-        aba.className = 'aba' + (index === 0 ? ' ativa' : '');
+        aba.className = 'aba' + (index === 0 ? ' ativa' : '') + (ehObrigatorios ? ' aba-obrigatorios' : '');
         aba.dataset.secao = secao.id;
         aba.innerHTML = `<i class="fa-solid ${secao.icone}"></i> ${secao.nome} <span class="contagem" data-contagem="${secao.id}">0</span>`;
         aba.addEventListener('click', () => mostrarSecao(secao.id));
@@ -227,11 +240,12 @@ function montarSecoes() {
         <h2><i class="fa-solid ${secao.icone}"></i> ${secao.nome}</h2>
         ${temMinimo ? `<span class="meta-minimo" data-meta="${secao.id}"></span>` : ''}
       </div>
+      ${ehObrigatorios ? `<p class="descricao-obrigatorios"><i class="fa-solid fa-circle-info"></i> Estes são os alimentos com quantidade mínima para nutrir sua família de 4 pessoas. Os marcados com <i class="fa-solid fa-star"></i> <strong>Essencial p/ vencer</strong> precisam estar completos para você vencer a simulação — os demais são recomendados, mas você pode zerá-los e usar uma opção alternativa da seção correspondente.</p>` : ''}
       <div class="grade-alimentos" data-grade="${secao.id}"></div>
     `;
 
         const grade = bloco.querySelector(`[data-grade="${secao.id}"]`);
-        secao.alimentos.forEach(alimento => grade.appendChild(criarCartaoAlimento(alimento)));
+        secao.alimentos.forEach(alimento => grade.appendChild(criarCartaoAlimento(alimento, ehObrigatorios)));
 
         secoesEl.appendChild(bloco);
     });
@@ -256,7 +270,7 @@ function listarItensInsuficientes() {
 }
 
 function atualizarSecoes() {
-    SECOES.forEach(secao => {
+    SECOES_PARA_EXIBIR.forEach(secao => {
         const itensNaSecao = secao.alimentos.reduce((soma, a) => soma + (carrinho[a.id] || 0), 0);
         document.querySelector(`[data-contagem="${secao.id}"]`).textContent = itensNaSecao;
 
@@ -289,7 +303,6 @@ function atualizarTudo() {
     atualizarCartoes();
 }
 
-// ----- Toast de aviso -----
 let timeoutToast = null;
 function mostrarToast(mensagem) {
     let toast = document.getElementById('toast-aviso');
@@ -313,7 +326,7 @@ function tentarFinalizar() {
         mostrarToast(`Quantidade mínima para abastecer sua família de 4 pessoas é ${primeiro.alimento.minimoTexto}. Complete a quantidade ou zere o item e escolha outra opção da seção.`);
         mostrarSecao(primeiro.secaoId);
 
-        const cartao = document.querySelector(`.cartao-alimento[data-id="${primeiro.alimento.id}"]`);
+        const cartao = document.querySelector(`.secao-mercado.ativa .cartao-alimento[data-id="${primeiro.alimento.id}"]`);
         if (cartao) {
             cartao.scrollIntoView({ behavior: 'smooth', block: 'center' });
             cartao.classList.add('cartao-destaque');
@@ -332,6 +345,7 @@ function finalizarCompra() {
     const categoriasUltraCompradas = new Set();
     const listaCarrinho = [];
     const essenciaisFaltando = [];
+    const obrigatoriosFaltando = [];
 
     SECOES.forEach(secao => {
         secao.alimentos.forEach(alimento => {
@@ -344,8 +358,11 @@ function finalizarCompra() {
                 if (alimento.tipo === 'ultraprocessado') { itensUltra += qtd; categoriasUltraCompradas.add(secao.id); }
             }
 
-            if (alimento.minimoFamilia > 0 && qtd === 0) {
-                essenciaisFaltando.push(alimento.nome);
+            if (alimento.minimoFamilia > 0 && qtd < alimento.minimoFamilia) {
+                essenciaisFaltando.push({ nome: alimento.nome, minimoTexto: alimento.minimoTexto });
+                if (ehEssencialParaVitoria(alimento)) {
+                    obrigatoriosFaltando.push({ nome: alimento.nome, minimoTexto: alimento.minimoTexto });
+                }
             }
         });
     });
@@ -358,15 +375,20 @@ function finalizarCompra() {
         itensUltra,
         fatoresRisco: categoriasUltraCompradas.size,
         essenciaisFaltando,
+        obrigatoriosFaltando,
         carrinho: listaCarrinho
     };
 
     localStorage.setItem('carrinhoReal_resultado', JSON.stringify(resultado));
-    window.location.href = 'final.html';
+
+    window.location.href = (obrigatoriosFaltando.length === 0) ? 'vitoria.html' : 'final.html';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     montarSecoes();
     atualizarTudo();
-    document.getElementById('btn-finalizar').addEventListener('click', tentarFinalizar);
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener('click', tentarFinalizar);
+    }
 });

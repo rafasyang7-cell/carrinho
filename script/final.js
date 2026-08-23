@@ -1,4 +1,8 @@
-// ===== Tela Final (Game Over Educativo) =====
+// ===== Tela Final: GAME OVER =====
+// Só chegamos aqui quando pelo menos 1 dos 6 alimentos essenciais (arroz, feijão
+// carioca, ovos, óleo, cenoura, banana) não foi comprado na quantidade completa.
+// Se os 6 estiverem completos, quem decide o destino é o mercado.js, que manda
+// para vitoria.html em vez desta tela.
 document.addEventListener('DOMContentLoaded', () => {
     const nome = localStorage.getItem('carrinhoReal_nome') || 'jogador(a)';
     const dadosBrutos = localStorage.getItem('carrinhoReal_resultado');
@@ -14,40 +18,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const totalItens = dados.itensNatural + dados.itensProcessado + dados.itensUltra;
     const saldoFinal = dados.orcamentoTotal - dados.gastoTotal;
+    const obrigatoriosFaltando = dados.obrigatoriosFaltando || [];
 
     document.getElementById('titulo-resultado').textContent = `Fim de mês, ${nome}`;
 
     const seloEl = document.getElementById('selo-status');
     const mensagemEl = document.getElementById('mensagem-principal');
 
-    let estadoMascote = 'neutro';
+    seloEl.classList.add('alerta');
+    let estadoMascote = 'preocupado';
 
-    if (dados.fatoresRisco >= 3) {
-        seloEl.classList.add('alerta');
-        seloEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Orçamento apertado, saúde em risco';
+    if (obrigatoriosFaltando.length >= 3) {
+        seloEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Alimentação insuficiente';
         estadoMascote = 'triste';
-    } else if (dados.fatoresRisco > 0) {
-        seloEl.classList.add('alerta');
-        seloEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Alguns pontos de atenção';
-        estadoMascote = 'preocupado';
-    } else if (dados.essenciaisFaltando && dados.essenciaisFaltando.length > 0) {
-        seloEl.classList.add('alerta');
-        seloEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Cesta saudável, mas incompleta';
-        estadoMascote = 'preocupado';
     } else {
-        seloEl.classList.add('bom');
-        seloEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Cesta majoritariamente saudável';
-        estadoMascote = 'feliz';
+        seloEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Faltou pouco para vencer';
+        estadoMascote = 'preocupado';
     }
+    if (saldoFinal <= 0) estadoMascote = 'chocado';
 
     atualizarMascote(estadoMascote);
 
+    const listaNomesFaltando = obrigatoriosFaltando.map(i => i.nome.toLowerCase()).join(', ');
+
     mensagemEl.textContent =
-        `Parabéns, você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)}, ` +
-        `mas acumulou ${dados.fatoresRisco} ${dados.fatoresRisco === 1 ? 'fator de risco' : 'fatores de risco'} ` +
-        `para doenças crônicas ao longo do mês, por causa da presença de alimentos ultraprocessados ` +
-        `na cesta. Isso mostra como o preço pode empurrar famílias de baixa renda para uma alimentação ` +
-        `menos nutritiva, mesmo quando a intenção é comer bem.`;
+        `Você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)}, mas o ` +
+        `orçamento não foi suficiente para fechar a quantidade mínima de itens essenciais` +
+        (listaNomesFaltando ? ` (${listaNomesFaltando})` : '') + `. ` +
+        `Isso mostra como o preço pode empurrar famílias de baixa renda para uma alimentação ` +
+        `insuficiente ou pouco nutritiva, mesmo quando a intenção é comer bem.`;
 
     document.getElementById('num-gasto').textContent = formatarMoeda(dados.gastoTotal);
     document.getElementById('num-saldo').textContent = formatarMoeda(saldoFinal);
@@ -59,13 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fatia-ultra').style.width = (dados.itensUltra / totalItens * 100) + '%';
     }
 
-    if (dados.essenciaisFaltando && dados.essenciaisFaltando.length > 0) {
+    // O que a pessoa deveria ter colocado no carrinho, e a quantidade certa
+    // (só os 6 essenciais — é exatamente o motivo do GAME OVER)
+    if (obrigatoriosFaltando.length > 0) {
         const blocoFaltando = document.getElementById('bloco-faltando');
         const listaFaltando = document.getElementById('lista-faltando');
         blocoFaltando.style.display = 'block';
-        dados.essenciaisFaltando.forEach(nomeAlimento => {
+        obrigatoriosFaltando.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = nomeAlimento;
+            li.innerHTML = `<strong>${item.nome}</strong> — faltou completar ${item.minimoTexto}`;
             listaFaltando.appendChild(li);
         });
     }

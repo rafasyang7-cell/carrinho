@@ -85,6 +85,7 @@
 .recibo-flutuante .bloco strong {
     font-family: var(--fonte-numero);
     font-size: 1.05rem;
+    transition: color .25s ease;
 }
 
 #saldo-restante.negativo {
@@ -110,6 +111,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: balanca-cesta 3.2s ease-in-out infinite;
+}
+
+@keyframes balanca-cesta {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-8deg);
+    }
+}
+
+.recibo-flutuante:hover .icone-cesta {
+    animation-play-state: paused;
+    transform: scale(1.1);
 }
 
 @media (max-width:560px) {
