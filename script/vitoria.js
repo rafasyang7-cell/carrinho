@@ -1,8 +1,9 @@
 // ===== Tela Final: VITÓRIA =====
-// Só chegamos aqui quando os 9 requisitos essenciais (arroz, feijão, macarrão,
-// farinha de mandioca, uma proteína, açúcar, café, sal e leite) foram completados
-// na quantidade mínima. Quem decide isso
-// é o mercado.js — se faltar algum deles, vai para final.html (GAME OVER) em vez desta.
+// Só chegamos aqui quando a cesta tem pelo menos 1 item de cada um dos 5 grupos
+// alimentares básicos (Grãos/Massas, Proteínas, Gorduras, Legumes/Frutas e
+// Mercearia) — mesmo que a quantidade de algum deles esteja abaixo do recomendado
+// (nesse caso, a tela mostra um aviso, mas a vitória continua valendo). Quem decide
+// isso é o mercado.js — se faltar um grupo inteiro, vai para final.html (GAME OVER).
 document.addEventListener('DOMContentLoaded', () => {
     const nome = localStorage.getItem('carrinhoReal_nome') || 'jogador(a)';
     const dadosBrutos = localStorage.getItem('carrinhoReal_resultado');
@@ -27,11 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const seloEl = document.getElementById('selo-status');
     if (cestaCompleta && !usouUltraprocessado) {
-        seloEl.innerHTML = '<i class="fa-solid fa-trophy"></i> Cesta completa e sem ultraprocessados';
+        seloEl.innerHTML = '<i class="fa-solid fa-trophy"></i> Cesta completa, variada e sem ultraprocessados';
     } else if (cestaCompleta) {
-        seloEl.innerHTML = '<i class="fa-solid fa-trophy"></i> Todos os alimentos recomendados, na quantidade certa';
+        seloEl.innerHTML = '<i class="fa-solid fa-trophy"></i> Cesta variada, com todos os alimentos na quantidade certa';
     } else {
-        seloEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Essenciais completos';
+        seloEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Cesta variada, mas com quantidades insuficientes';
     }
 
     const mensagemEl = document.getElementById('mensagem-principal');
@@ -44,15 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (cestaCompleta) {
         mensagemEl.textContent =
             `Você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)} e conseguiu ` +
-            `bater a quantidade recomendada de todos os alimentos com mínimo, incluindo os essenciais. ` +
-            `Ainda assim, sobrou espaço no carrinho para algum ultraprocessado — vale reparar como pequenas ` +
-            `trocas mudam o equilíbrio da cesta.`;
+            `bater a quantidade recomendada de todos os alimentos com mínimo. Ainda assim, sobrou espaço no ` +
+            `carrinho para algum ultraprocessado vale reparar como pequenas trocas mudam o equilíbrio da cesta.`;
     } else {
         mensagemEl.textContent =
-            `Você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)} e garantiu a ` +
-            `quantidade completa da cesta básica essencial, foi apenas suficiente para ` +
-            `vencer a simulação. O orçamento não deu pra fechar tudo o mais recomendado, mas o básico da sua ` +
-            `família ficou garantido.`;
+            `Você alimentou sua família de 4 pessoas com ${formatarMoeda(dados.gastoTotal)} e conseguiu ter ` +
+            `variedade na cesta pelo menos um alimento de cada grupo alimentar. Isso já é suficiente para ` +
+            `vencer a simulação. Mas atenção: alguns itens ficaram abaixo da quantidade recomendada para o mês ` +
+            `(veja a lista abaixo) na vida real, isso significa uma alimentação incompleta, mesmo variada.`;
     }
 
     document.getElementById('num-gasto').textContent = formatarMoeda(dados.gastoTotal);

@@ -1,3 +1,4 @@
+/* ===== Conteúdo - Tela Salário (recibo animado) ===== */
 main.salario {
     flex: 1;
     display: flex;
@@ -53,6 +54,7 @@ main.salario {
     font-size: 1.6rem;
 }
 
+/* ----- Recibo ----- */
 .recibo {
     background: var(--papel-cartao);
     border-radius: var(--raio);
@@ -122,6 +124,57 @@ main.salario {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--verde-medio);
+}
+
+.item-recibo--subtotal {
+    border-bottom: none;
+    padding-top: 6px;
+    padding-bottom: 14px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid rgba(27, 67, 50, 0.12);
+}
+
+.item-recibo--subtotal .rotulo {
+    font-weight: 600;
+}
+
+.valor-positivo {
+    color: var(--verde-medio) !important;
+    font-weight: 700;
+}
+
+.item-recibo--renda-combinada {
+    background: var(--verde-claro);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-bottom: none;
+    margin-top: 6px;
+}
+
+.item-recibo--renda-combinada .rotulo {
+    font-weight: 700;
+    color: var(--verde-escuro);
+}
+
+.item-recibo--renda-combinada .valor {
+    font-size: 1.1rem;
+}
+
+.nota-per-capita {
+    font-size: 0.78rem;
+    color: var(--tinta-suave);
+    background: var(--papel);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 8px 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity .4s ease;
+}
+
+.nota-per-capita strong {
+    color: var(--verde-escuro);
 }
 
 .item-recibo .rotulo i {

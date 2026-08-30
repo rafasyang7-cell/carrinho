@@ -2,21 +2,26 @@
 // Preços médios de pesquisa de mercado nacional (referência 2026).
 // Cada alimento in natura tem um "minimoFamilia": a quantidade aproximada
 // necessária para alimentar adequadamente uma família de 4 pessoas por 1 mês.
-// REGRA DO CARRINHO: para cada alimento com mínimo, o jogador precisa colocar
-// 0 (não compra esse item, e pode substituir por uma opção processada/ultra
-// da mesma seção) OU a quantidade mínima completa — nunca uma quantidade
-// "pela metade". Alimentos processados/ultraprocessados não têm mínimo.
+// A pessoa PODE finalizar a compra mesmo com alimentos abaixo do mínimo — isso
+// só gera um aviso (na hora de colocar no carrinho, e de novo ao finalizar).
 //
-// FOTOS: cada alimento tenta carregar image/comida/<id>.jpg automaticamente.
+// REGRA DE VITÓRIA — DIVERSIDADE: a cesta precisa ter pelo menos 1 item de cada
+// um dos 5 grupos alimentares básicos (grãos/massas, proteínas, gorduras,
+// legumes/frutas, mercearia) para ser considerada uma cesta "diversa" o
+// suficiente e resultar em VITÓRIA — mesmo que a quantidade de algum alimento
+// fique abaixo do recomendado (isso vira só um aviso na tela de resultado).
+// Se faltar um grupo alimentar inteiro (nenhum item dele no carrinho), é GAME OVER.
+//
+// FOTOS: cada alimento tenta carregar image/mascote/comida/<id>.jpg automaticamente.
 // Enquanto o arquivo não existir, aparece um ícone do Font Awesome no lugar.
-// Basta salvar a foto com o nome certo (ex: image/comida/arroz.jpg) que ela
+// Basta salvar a foto com o nome certo (ex: image/mascote/comida/arroz.jpg) que ela
 // substitui o ícone sozinha.
 //
 // As seções abaixo misturam, de propósito, opções in natura, processadas e
 // ultraprocessadas dentro do MESMO grupo alimentar — assim dá pra comparar e
 // trocar um alimento saudável por um mais barato dentro da mesma categoria.
 
-const ORCAMENTO_TOTAL = parseFloat(localStorage.getItem('carrinhoReal_orcamentoAlimentacao')) || 148.83;
+const ORCAMENTO_TOTAL = parseFloat(localStorage.getItem('carrinhoReal_orcamentoAlimentacao')) || 1105.09;
 
 const SECOES = [
     {
@@ -111,82 +116,9 @@ const SECOES = [
     },
 ];
 
-// Seção especial "Alimentos Obrigatórios": reúne, num só lugar, todo alimento que
-// tem quantidade mínima para a família (vindo de qualquer categoria acima). Os cartões
-// aqui são os MESMOS objetos/estado das seções originais — mexer na quantidade aqui
-// atualiza a categoria de origem também, e vice-versa.
-const SECAO_OBRIGATORIOS = {
-    id: 'obrigatorios',
-    nome: 'Alimentos Obrigatórios',
-    icone: 'fa-star',
-    alimentos: SECOES.flatMap(secao => secao.alimentos.filter(a => a.minimoFamilia > 0)),
-};
-
-// A "cesta básica mínima" que precisa estar completa pra vencer a simulação.
-// A maioria é um alimento fixo — mas dois itens aceitam qualquer opção da lista
-// ("ou"): qualquer um dos feijões, e qualquer uma das proteínas (o ovo é o mais
-// barato e por isso o caminho mais viável dentro do orçamento, mas carne, frango
-// ou peixe também contam se a pessoa preferir/puder pagar).
-const REQUISITOS_ESSENCIAIS = [
-    'arroz',
-    ['feijao-carioca', 'feijao-preto'],
-    'macarrao',
-    'farinha-mandioca',
-    ['ovos', 'carne', 'frango', 'peixe'],
-    'acucar',
-    'cafe',
-    'sal',
-    'leite',
-];
-
-function obterAlimentoPorId(id) {
-    for (const secao of SECOES) {
-        const achou = secao.alimentos.find(a => a.id === id);
-        if (achou) return achou;
-    }
-    return null;
-}
-
-function requisitoSatisfeito(requisito) {
-    const ids = Array.isArray(requisito) ? requisito : [requisito];
-    return ids.some(id => {
-        const alimento = obterAlimentoPorId(id);
-        return alimento && (carrinho[alimento.id] || 0) >= alimento.minimoFamilia;
-    });
-}
-
-function descreverRequisitoFaltante(requisito) {
-    const ids = Array.isArray(requisito) ? requisito : [requisito];
-    const alimentos = ids.map(obterAlimentoPorId).filter(Boolean);
-
-    if (alimentos.length === 1) {
-        return { nome: alimentos[0].nome, minimoTexto: alimentos[0].minimoTexto };
-    }
-
-    // Grupos com opção ("ou"): mensagem curta e direta, sem listar cada alternativa.
-    if (ids.includes('feijao-carioca')) {
-        return { nome: 'Feijão', minimoTexto: alimentos[0].minimoTexto };
-    }
-    if (ids.includes('ovos')) {
-        return { nome: 'Ovos e carnes', minimoTexto: 'com proteína' };
-    }
-
-    // Reserva, caso outro grupo com opções seja adicionado no futuro.
-    const nomes = alimentos.map(a => a.nome).join(' e ');
-    return { nome: nomes, minimoTexto: 'com uma das opções dessa categoria' };
-}
-
-// IDs "achatados" de todos os alimentos que fazem parte de algum requisito essencial
-// — usado só pra desenhar a fitinha "Essencial p/ vencer" nos cartões.
-const IDS_ESSENCIAIS_PARA_VITORIA = REQUISITOS_ESSENCIAIS.flatMap(r => Array.isArray(r) ? r : [r]);
-
-function ehEssencialParaVitoria(alimento) {
-    return IDS_ESSENCIAIS_PARA_VITORIA.includes(alimento.id);
-}
-
-// Lista usada para montar as abas/telas (a seção de obrigatórios aparece primeiro).
-// O cálculo de gasto/resultado continua usando só SECOES, pra não contar nada em dobro.
-const SECOES_PARA_EXIBIR = [SECAO_OBRIGATORIOS, ...SECOES];
+// Grupos considerados na regra de DIVERSIDADE (ver mais abaixo). "Bebidas" fica de
+// fora por ser mais um extra do que uma necessidade nutricional básica.
+const GRUPOS_PARA_DIVERSIDADE = ['graos-carboidratos', 'proteinas', 'gorduras', 'legumes-frutas', 'mercearia'];
 
 const carrinho = {}; // { alimentoId: quantidade }
 
@@ -225,16 +157,14 @@ function podeAdicionar(alimento) {
     return (gasto + alimento.preco) <= ORCAMENTO_TOTAL + 0.001;
 }
 
-function criarCartaoAlimento(alimento, destacarEssencial) {
+function criarCartaoAlimento(alimento) {
     const div = document.createElement('div');
     div.className = 'cartao-alimento';
     div.dataset.id = alimento.id;
 
     const rotulos = { natural: 'In natura', processado: 'Processado', ultraprocessado: 'Ultraprocessado' };
-    const ehEssencial = !!destacarEssencial && ehEssencialParaVitoria(alimento);
 
     div.innerHTML = `
-    ${ehEssencial ? `<span class="fita-essencial"><i class="fa-solid fa-star"></i> Essencial p/ vencer</span>` : ''}
     <div class="foto-alimento">
       <i class="fa-solid ${alimento.icone} icone-alimento"></i>
       <img src="image/mascote/comida/${alimento.id}.jpg" alt="${alimento.nome}" onerror="this.remove()">
@@ -299,13 +229,12 @@ function montarSecoes() {
     const abasEl = document.getElementById('abas-secoes');
     const secoesEl = document.getElementById('secoes-mercado');
 
-    SECOES_PARA_EXIBIR.forEach((secao, index) => {
+    SECOES.forEach((secao, index) => {
         const temMinimo = secao.alimentos.some(a => a.minimoFamilia > 0);
-        const ehObrigatorios = secao.id === 'obrigatorios';
 
         const aba = document.createElement('button');
         aba.type = 'button';
-        aba.className = 'aba' + (index === 0 ? ' ativa' : '') + (ehObrigatorios ? ' aba-obrigatorios' : '');
+        aba.className = 'aba' + (index === 0 ? ' ativa' : '');
         aba.dataset.secao = secao.id;
         aba.innerHTML = `<i class="fa-solid ${secao.icone}"></i> ${secao.nome} <span class="contagem" data-contagem="${secao.id}">0</span>`;
         aba.addEventListener('click', () => mostrarSecao(secao.id));
@@ -320,12 +249,11 @@ function montarSecoes() {
         <h2><i class="fa-solid ${secao.icone}"></i> ${secao.nome}</h2>
         ${temMinimo ? `<span class="meta-minimo" data-meta="${secao.id}"></span>` : ''}
       </div>
-      ${ehObrigatorios ? `<p class="descricao-obrigatorios"><i class="fa-solid fa-circle-info"></i> Estes são os alimentos com quantidade mínima para nutrir sua família de 4 pessoas. Os marcados com <i class="fa-solid fa-star"></i> <strong>Essencial p/ vencer</strong> fazem parte da cesta básica que precisa estar completa pra você vencer a simulação (feijão e proteína aceitam qualquer opção da categoria) — os demais são recomendados, mas você pode zerá-los e usar uma opção alternativa da seção correspondente.</p>` : ''}
       <div class="grade-alimentos" data-grade="${secao.id}"></div>
     `;
 
         const grade = bloco.querySelector(`[data-grade="${secao.id}"]`);
-        secao.alimentos.forEach(alimento => grade.appendChild(criarCartaoAlimento(alimento, ehObrigatorios)));
+        secao.alimentos.forEach(alimento => grade.appendChild(criarCartaoAlimento(alimento)));
 
         secoesEl.appendChild(bloco);
     });
@@ -350,7 +278,7 @@ function listarItensInsuficientes() {
 }
 
 function atualizarSecoes() {
-    SECOES_PARA_EXIBIR.forEach(secao => {
+    SECOES.forEach(secao => {
         const itensNaSecao = secao.alimentos.reduce((soma, a) => soma + (carrinho[a.id] || 0), 0);
         document.querySelector(`[data-contagem="${secao.id}"]`).textContent = itensNaSecao;
 
@@ -381,6 +309,7 @@ function atualizarTudo() {
     atualizarOrcamentoNoTopo();
     atualizarSecoes();
     atualizarCartoes();
+    avisoJaConfirmado = false; // qualquer mudança no carrinho pede um novo aviso, se ainda houver pendência
 }
 
 // ----- Toast de aviso -----
@@ -399,20 +328,33 @@ function mostrarToast(mensagem) {
     timeoutToast = setTimeout(() => toast.classList.remove('mostrar'), 5000);
 }
 
+// Quantos dos 5 grupos alimentares básicos têm pelo menos 1 item no carrinho
+// (não importa a quantidade — isso é só sobre ter VARIEDADE na cesta).
+function calcularDiversidade() {
+    const gruposComItem = GRUPOS_PARA_DIVERSIDADE.filter(secaoId => {
+        const secao = SECOES.find(s => s.id === secaoId);
+        return secao.alimentos.some(a => (carrinho[a.id] || 0) > 0);
+    });
+    return {
+        atingida: gruposComItem.length === GRUPOS_PARA_DIVERSIDADE.length,
+        gruposFaltando: GRUPOS_PARA_DIVERSIDADE
+            .filter(id => !gruposComItem.includes(id))
+            .map(id => SECOES.find(s => s.id === id).nome),
+    };
+}
+
+// Não existe mais bloqueio por quantidade insuficiente — a pessoa pode finalizar
+// mesmo com itens pela metade. Só pedimos uma confirmação (1 clique de aviso +
+// 1 clique pra confirmar) quando há alimentos abaixo do recomendado, pra garantir
+// que ela viu o aviso antes de seguir.
+let avisoJaConfirmado = false;
+
 function tentarFinalizar() {
     const insuficientes = listarItensInsuficientes();
 
-    if (insuficientes.length > 0) {
-        const primeiro = insuficientes[0];
-        mostrarToast(`Quantidade mínima para abastecer sua família de 4 pessoas é ${primeiro.alimento.minimoTexto}. Complete a quantidade ou zere o item e escolha outra opção da seção.`);
-        mostrarSecao(primeiro.secaoId);
-
-        const cartao = document.querySelector(`.secao-mercado.ativa .cartao-alimento[data-id="${primeiro.alimento.id}"]`);
-        if (cartao) {
-            cartao.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            cartao.classList.add('cartao-destaque');
-            setTimeout(() => cartao.classList.remove('cartao-destaque'), 1600);
-        }
+    if (insuficientes.length > 0 && !avisoJaConfirmado) {
+        mostrarToast(`${insuficientes.length} alimento(s) estão com quantidade abaixo do recomendado. Clique em "Finalizar compra" de novo se quiser continuar assim mesmo.`);
+        avisoJaConfirmado = true;
         return;
     }
 
@@ -425,7 +367,7 @@ function finalizarCompra() {
     let itensNatural = 0, itensProcessado = 0, itensUltra = 0;
     const categoriasUltraCompradas = new Set();
     const listaCarrinho = [];
-    const essenciaisFaltando = [];       // qualquer item com mínimo que ficou zerado (informativo)
+    const essenciaisFaltando = []; // qualquer item com mínimo que ficou abaixo do recomendado (aviso)
 
     SECOES.forEach(secao => {
         secao.alimentos.forEach(alimento => {
@@ -444,6 +386,8 @@ function finalizarCompra() {
         });
     });
 
+    const diversidade = calcularDiversidade();
+
     const resultado = {
         gastoTotal,
         orcamentoTotal: ORCAMENTO_TOTAL,
@@ -452,15 +396,17 @@ function finalizarCompra() {
         itensUltra,
         fatoresRisco: categoriasUltraCompradas.size,
         essenciaisFaltando,
-        obrigatoriosFaltando: REQUISITOS_ESSENCIAIS.filter(req => !requisitoSatisfeito(req)).map(descreverRequisitoFaltante),
+        diversidadeAtingida: diversidade.atingida,
+        gruposFaltando: diversidade.gruposFaltando,
         carrinho: listaCarrinho
     };
 
     localStorage.setItem('carrinhoReal_resultado', JSON.stringify(resultado));
 
-    // VITÓRIA: todos os 9 requisitos essenciais foram cumpridos (alguns com opção
-    // "ou"). GAME OVER: faltou completar pelo menos um deles.
-    window.location.href = (resultado.obrigatoriosFaltando.length === 0) ? 'vitoria.html' : 'final.html';
+    // VITÓRIA: a cesta tem pelo menos 1 item de cada um dos 5 grupos alimentares
+    // básicos — mesmo que a quantidade de algum deles esteja abaixo do recomendado
+    // (isso só gera um aviso na tela de resultado). GAME OVER: falta 1 grupo inteiro.
+    window.location.href = diversidade.atingida ? 'vitoria.html' : 'final.html';
 }
 
 document.addEventListener('DOMContentLoaded', () => {

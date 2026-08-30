@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seu Salário · O Desafio do Carrinho Real</title>
+    <title>Sua Renda Familiar · O Desafio do Carrinho Real</title>
     <link rel="stylesheet" href="css/salariostyle.css">
     <link rel="stylesheet" href="css/salarioheader.css">
     <link rel="stylesheet" href="css/salariohome.css">
@@ -22,7 +22,7 @@
                     <span>Simulação · Técnico em Nutrição e Dietética</span>
                 </div>
             </div>
-            <span class="passo">PASSO 2 DE 4 · SALÁRIO</span>
+            <span class="passo">PASSO 2 DE 4 · RENDA FAMILIAR</span>
         </div>
     </header>
 
@@ -32,31 +32,38 @@
 
                 <div class="cartao-intro-salario">
                     <h2 id="titulo-saudacao">Olá!</h2>
-                    <p>Este mês, este é o seu salário — um salário mínimo. Antes de pensar em comida,
-                        os impostos e as contas fixas da casa precisam ser pagos primeiro. É o que sobra
-                        depois delas que vira o orçamento da sua família no mercado.</p>
-                    <p>Acompanhe ao lado como o seu salário vai sendo consumido, passo a passo.</p>
+                    <p>Na sua casa, dois adultos trabalham: você e seu (sua) companheiro (a). Antes de
+                        pensar em comida, os impostos de cada salário e as contas fixas da casa precisam
+                        ser pagos primeiro. É o que sobra depois delas que vira o orçamento da família
+                        no mercado.</p>
+                    <p>Acompanhe ao lado como a renda da família vai sendo formada e depois consumida,
+                        passo a passo.</p>
 
                     <div class="linha-salario-bruto">
-                        <span>Salário bruto (salário mínimo 2026)</span>
+                        <span>Seu salário bruto (salário mínimo 2026)</span>
                         <strong>R$ 1.621,00</strong>
+                    </div>
+                    <div class="linha-salario-bruto" style="margin-top:12px;">
+                        <span>Salário bruto do (a) companheiro(a) — 6h/dia</span>
+                        <strong>R$ 1.105,50</strong>
                     </div>
                 </div>
 
                 <div class="recibo">
-                    <h3><i class="fa-solid fa-receipt"></i> Do salário ao orçamento de comida</h3>
-                    <p class="subtitulo-recibo">Descontando impostos e despesas fixas...</p>
+                    <h3><i class="fa-solid fa-receipt"></i> Da renda da família ao orçamento de comida</h3>
+                    <p class="subtitulo-recibo">Descontando impostos, somando as duas rendas e tirando as despesas
+                        fixas...</p>
 
                     <div id="lista-recibo">
-                        <p class="linha-separador">Descontos sobre o salário</p>
-                        <div class="item-recibo" data-valor="121.58">
+                        <p class="linha-separador">Seu salário</p>
+                        <div class="item-recibo" data-tipo="desconto" data-valor="121.58">
                             <span class="rotulo">
                                 <i class="fa-solid fa-file-invoice-dollar"></i>
                                 <span class="textos">INSS<span class="detalhe">7,5% sobre o salário mínimo</span></span>
                             </span>
                             <span class="valor">− R$ 121,58</span>
                         </div>
-                        <div class="item-recibo" data-valor="97.26">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="97.26">
                             <span class="rotulo">
                                 <i class="fa-solid fa-bus"></i>
                                 <span class="textos">Vale-transporte<span class="detalhe">6% sobre o
@@ -64,24 +71,62 @@
                             </span>
                             <span class="valor">− R$ 97,26</span>
                         </div>
+                        <div class="item-recibo item-recibo--subtotal" data-tipo="subtotal-liquido" data-valor="0">
+                            <span class="rotulo"><span class="textos">Seu salário líquido</span></span>
+                            <span class="valor valor-positivo">R$ 1.402,16</span>
+                        </div>
+
+                        <p class="linha-separador">Salário do(a) companheiro(a)</p>
+                        <div class="item-recibo" data-tipo="desconto" data-valor="82.91">
+                            <span class="rotulo">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                                <span class="textos">INSS<span class="detalhe">7,5% sobre o salário-base (abaixo de 1
+                                        salário mínimo)</span></span>
+                            </span>
+                            <span class="valor">− R$ 82,91</span>
+                        </div>
+                        <div class="item-recibo" data-tipo="desconto" data-valor="66.33">
+                            <span class="rotulo">
+                                <i class="fa-solid fa-bus"></i>
+                                <span class="textos">Vale-transporte<span class="detalhe">6% sobre o
+                                        salário-base</span></span>
+                            </span>
+                            <span class="valor">− R$ 66,33</span>
+                        </div>
+                        <div class="item-recibo item-recibo--subtotal" data-tipo="subtotal-liquido" data-valor="0">
+                            <span class="rotulo"><span class="textos">Salário líquido do (a)
+                                    companheiro(a)</span></span>
+                            <span class="valor valor-positivo">R$ 956,26</span>
+                        </div>
+
+                        <div class="item-recibo item-recibo--renda-combinada" data-tipo="renda-combinada"
+                            data-valor="0">
+                            <span class="rotulo"><i class="fa-solid fa-people-roof"></i> <span class="textos">Renda
+                                    combinada da família</span></span>
+                            <span class="valor valor-positivo">R$ 2.358,42</span>
+                        </div>
+                        <p class="nota-per-capita" id="nota-per-capita">
+                            <i class="fa-solid fa-chart-pie"></i> Renda per capita da família (÷ 4 pessoas): <strong>R$
+                                589,61</strong>
+                        </p>
 
                         <p class="linha-separador">Despesas fixas da casa</p>
-                        <div class="item-recibo" data-valor="800">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="800">
                             <span class="rotulo"><i class="fa-solid fa-house"></i> <span
                                     class="textos">Aluguel</span></span>
                             <span class="valor">− R$ 800,00</span>
                         </div>
-                        <div class="item-recibo" data-valor="120">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="120">
                             <span class="rotulo"><i class="fa-solid fa-bolt"></i> <span class="textos">Energia
                                     elétrica</span></span>
                             <span class="valor">− R$ 120,00</span>
                         </div>
-                        <div class="item-recibo" data-valor="100">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="100">
                             <span class="rotulo"><i class="fa-solid fa-tint"></i> <span class="textos">Água e
                                     esgoto</span></span>
                             <span class="valor">− R$ 100,00</span>
                         </div>
-                        <div class="item-recibo" data-valor="33.33">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="33.33">
                             <span class="rotulo">
                                 <i class="fa-solid fa-fire-burner"></i>
                                 <span class="textos">Gás de cozinha<span class="detalhe">R$ 100,00 ÷ 3 (o botijão dura
@@ -89,17 +134,17 @@
                             </span>
                             <span class="valor">− R$ 33,33</span>
                         </div>
-                        <div class="item-recibo" data-valor="100">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="100">
                             <span class="rotulo"><i class="fa-solid fa-wifi"></i> <span class="textos">Plano de
                                     internet</span></span>
                             <span class="valor">− R$ 100,00</span>
                         </div>
-                        <div class="item-recibo" data-valor="50">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="50">
                             <span class="rotulo"><i class="fa-solid fa-spray-can-sparkles"></i> <span
                                     class="textos">Produtos de limpeza</span></span>
                             <span class="valor">− R$ 50,00</span>
                         </div>
-                        <div class="item-recibo" data-valor="50">
+                        <div class="item-recibo" data-tipo="desconto" data-valor="50">
                             <span class="rotulo"><i class="fa-solid fa-pump-soap"></i> <span class="textos">Produtos de
                                     higiene</span></span>
                             <span class="valor">− R$ 50,00</span>
@@ -108,12 +153,12 @@
 
                     <div class="linha-subtotal">
                         <span>Saldo restante</span>
-                        <span id="saldo-parcial">R$ 1.621,00</span>
+                        <span id="saldo-parcial">R$ 0,00</span>
                     </div>
 
                     <div class="resultado-final" id="resultado-final">
                         <span>Valor disponível para alimentação este mês</span>
-                        <strong id="valor-alimentacao">R$ 148,83</strong>
+                        <strong id="valor-alimentacao">R$ 1.105,09</strong>
                     </div>
 
                     <button class="btn-primario" id="btn-ir-mercado">
@@ -144,6 +189,7 @@
 
     <script src="script/salario.js"></script>
     <audio src="midia/inicio.mp3" autoplay loop></audio>
+
 
 </body>
 
