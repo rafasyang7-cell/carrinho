@@ -103,6 +103,32 @@ main.inicio {
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transform: scale(0) translateY(10px);
+    animation: chega-membro .5s cubic-bezier(.34, 1.56, .64, 1) forwards;
+}
+
+.familia-icones .membro:nth-child(1) {
+    animation-delay: .15s;
+}
+
+.familia-icones .membro:nth-child(2) {
+    animation-delay: .32s;
+}
+
+.familia-icones .membro:nth-child(3) {
+    animation-delay: .49s;
+}
+
+.familia-icones .membro:nth-child(4) {
+    animation-delay: .66s;
+}
+
+@keyframes chega-membro {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .campo {
@@ -154,6 +180,19 @@ main.inicio {
     width: 74px;
     height: 74px;
     flex-shrink: 0;
+    animation: respira-mascote 2.6s ease-in-out infinite;
+}
+
+@keyframes respira-mascote {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.045);
+    }
 }
 
 .mascote-visual img {
