@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     //   Companheiro(a):  1105.50 −  82.91 (INSS 7,5%) −  66.33 (VT 6%) =  956.26
     //   Renda combinada: 1402.16 + 956.26                              = 2358.42
     // Orçamento de alimentação = renda combinada − despesas fixas da casa:
-    //   2358.42 − (800 + 120 + 100 + 33.33 + 100 + 50 + 50) = 2358.42 − 1253.33 = 1105.09
+    //   2358.42 − (1500 + 120 + 100 + 33.33 + 100 + 50 + 150) = 2358.42 − 2053.33 = 305.09
     const RENDA_COMBINADA = 2358.42;
-    const ORCAMENTO_ALIMENTACAO = 1105.09;
+    const ORCAMENTO_ALIMENTACAO = 305.09;
 
     const formatarMoeda = (valor) =>
         valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });

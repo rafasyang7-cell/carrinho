@@ -42,12 +42,35 @@
         <div class="container">
 
             <div class="grade-topo-mercado">
-                <div class="aviso-familia">
-                    <i class="fa-solid fa-people-roof"></i>
-                    Você precisa alimentar uma família de <strong>4 pessoas</strong> pelo mês inteiro.
-                    Procure colocar pelo menos <strong>um alimento de cada seção</strong> no carrinho
-                    isso é o que garante uma cesta variada. A quantidade de cada um é só recomendada:
-                    dá pra finalizar mesmo com quantidade insuficiente, mas você vai ver um aviso sobre isso.
+                <div class="cartao-progresso">
+                    <div class="cartao-progresso-texto">
+                        <i class="fa-solid fa-people-roof"></i>
+                        <span>Alimente uma família de <strong>4 pessoas</strong> pelo mês, acenda 1 bolinha de cada
+                            seção:</span>
+                    </div>
+                    <div class="trilha-badges" id="trilha-badges">
+                        <div class="badge-grupo" data-grupo="graos-carboidratos">
+                            <div class="badge-icone"><i class="fa-solid fa-wheat-awn"></i></div>
+                            <span>Grãos</span>
+                        </div>
+                        <div class="badge-grupo" data-grupo="proteinas">
+                            <div class="badge-icone"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <span>Proteínas</span>
+                        </div>
+                        <div class="badge-grupo" data-grupo="gorduras">
+                            <div class="badge-icone"><i class="fa-solid fa-jar"></i></div>
+                            <span>Gorduras</span>
+                        </div>
+                        <div class="badge-grupo" data-grupo="legumes-frutas">
+                            <div class="badge-icone"><i class="fa-solid fa-carrot"></i></div>
+                            <span>Legumes/Frutas</span>
+                        </div>
+                        <div class="badge-grupo" data-grupo="mercearia">
+                            <div class="badge-icone"><i class="fa-solid fa-boxes-stacked"></i></div>
+                            <span>Mercearia</span>
+                        </div>
+                    </div>
+                    <div class="trilha-trofeu" id="trilha-trofeu"><i class="fa-solid fa-trophy"></i></div>
                 </div>
 
                 <div class="mascote-lateral">
@@ -92,7 +115,6 @@
     <script src="script/mascote.js"></script>
     <script src="script/mercado.js"></script>
     <audio src="midia/inicio.mp3" autoplay loop></audio>
-
 
 </body>
 

@@ -21,7 +21,7 @@
 // ultraprocessadas dentro do MESMO grupo alimentar — assim dá pra comparar e
 // trocar um alimento saudável por um mais barato dentro da mesma categoria.
 
-const ORCAMENTO_TOTAL = parseFloat(localStorage.getItem('carrinhoReal_orcamentoAlimentacao')) || 1105.09;
+const ORCAMENTO_TOTAL = parseFloat(localStorage.getItem('carrinhoReal_orcamentoAlimentacao')) || 305.09;
 
 const SECOES = [
     {
@@ -29,17 +29,17 @@ const SECOES = [
         nome: 'Grãos, Massas e Pães',
         icone: 'fa-wheat-awn',
         alimentos: [
-            { id: 'arroz', nome: 'Arroz', unidade: 'pacote 1kg', preco: 6.20, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 6, minimoTexto: '6kg de arroz' },
-            { id: 'feijao-carioca', nome: 'Feijão carioca', unidade: 'pacote 1kg', preco: 9.80, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 3, minimoTexto: '3kg de feijão' },
-            { id: 'feijao-preto', nome: 'Feijão preto', unidade: 'pacote 1kg', preco: 9.50, tipo: 'natural', icone: 'fa-mortar-pestle', minimoFamilia: 3, minimoTexto: '3kg de feijão' },
-            { id: 'macarrao', nome: 'Macarrão', unidade: 'pacote 500g', preco: 4.50, tipo: 'processado', icone: 'fa-bowl-food', minimoFamilia: 2, minimoTexto: '2 pacotes de macarrão' },
-            { id: 'farinha-mandioca', nome: 'Farinha de mandioca', unidade: 'pacote 1kg', preco: 5.50, tipo: 'natural', icone: 'fa-jar', minimoFamilia: 1, minimoTexto: '1kg de farinha de mandioca' },
-            { id: 'milho', nome: 'Milho verde (espiga)', unidade: 'pacote com 3', preco: 7.00, tipo: 'natural', icone: 'fa-wheat-awn', minimoFamilia: 2, minimoTexto: '2 pacotes de milho verde' },
+            { id: 'arroz', nome: 'Arroz', unidade: 'pacote 1kg', preco: 5.10, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 6, minimoTexto: '6kg de arroz' },
+            { id: 'feijao-carioca', nome: 'Feijão carioca', unidade: 'pacote 1kg', preco: 7.79, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 3, minimoTexto: '3kg de feijão' },
+            { id: 'feijao-preto', nome: 'Feijão preto', unidade: 'pacote 1kg', preco: 7.50, tipo: 'natural', icone: 'fa-mortar-pestle', minimoFamilia: 3, minimoTexto: '3kg de feijão' },
+            { id: 'macarrao', nome: 'Macarrão', unidade: 'pacote 500g', preco: 2.79, tipo: 'processado', icone: 'fa-bowl-food', minimoFamilia: 2, minimoTexto: '2 pacotes de macarrão' },
+            { id: 'farinha-mandioca', nome: 'Farinha de mandioca', unidade: 'pacote 1kg', preco: 5.90, tipo: 'natural', icone: 'fa-jar', minimoFamilia: 1, minimoTexto: '1kg de farinha de mandioca' },
+            { id: 'milho', nome: 'Milho verde (espiga)', unidade: 'pacote com 3', preco: 6.85, tipo: 'natural', icone: 'fa-wheat-awn', minimoFamilia: 2, minimoTexto: '2 pacotes de milho verde' },
             { id: 'pao-frances', nome: 'Pão francês', unidade: '10 unidades', preco: 9.00, tipo: 'processado', icone: 'fa-bread-slice', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'pao-forma', nome: 'Pão de forma', unidade: 'pacote', preco: 10.50, tipo: 'processado', icone: 'fa-bread-slice', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'miojo', nome: 'Macarrão instantâneo (miojo)', unidade: 'pacote', preco: 2.50, tipo: 'ultraprocessado', icone: 'fa-utensils', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'biscoito', nome: 'Biscoito recheado', unidade: 'pacote', preco: 5.50, tipo: 'ultraprocessado', icone: 'fa-cookie', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'salgadinho', nome: 'Salgadinho (chips)', unidade: 'pacote', preco: 7.50, tipo: 'ultraprocessado', icone: 'fa-stroopwafel', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'pao-forma', nome: 'Pão de forma', unidade: 'pacote', preco: 7.79, tipo: 'processado', icone: 'fa-bread-slice', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'miojo', nome: 'Macarrão instantâneo (miojo)', unidade: 'pacote', preco: 2.29, tipo: 'ultraprocessado', icone: 'fa-utensils', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'biscoito', nome: 'Biscoito recheado', unidade: 'pacote', preco: 3.50, tipo: 'ultraprocessado', icone: 'fa-cookie', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'salgadinho', nome: 'Salgadinho (chips)', unidade: 'pacote', preco: 6.90, tipo: 'ultraprocessado', icone: 'fa-stroopwafel', minimoFamilia: 0, minimoTexto: '' },
         ]
     },
     {
@@ -47,17 +47,17 @@ const SECOES = [
         nome: 'Carnes, Peixes, Ovos e Frios',
         icone: 'fa-drumstick-bite',
         alimentos: [
-            { id: 'ovos', nome: 'Ovos', unidade: 'dúzia', preco: 11.80, tipo: 'natural', icone: 'fa-egg', minimoFamilia: 2, minimoTexto: '2 dúzias de ovos' },
-            { id: 'carne', nome: 'Carne bovina (acém/patinho)', unidade: '1kg', preco: 34.90, tipo: 'natural', icone: 'fa-cow', minimoFamilia: 3, minimoTexto: '3kg de carne bovina' },
-            { id: 'frango', nome: 'Frango (peito/coxa)', unidade: '1kg', preco: 16.90, tipo: 'natural', icone: 'fa-drumstick-bite', minimoFamilia: 3, minimoTexto: '3kg de frango' },
-            { id: 'peixe', nome: 'Peixe fresco (tilápia)', unidade: '1kg', preco: 22.00, tipo: 'natural', icone: 'fa-fish', minimoFamilia: 2, minimoTexto: '2kg de peixe' },
-            { id: 'atum', nome: 'Atum enlatado', unidade: 'lata', preco: 7.50, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'sardinha', nome: 'Sardinha enlatada', unidade: 'lata', preco: 6.20, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'queijo', nome: 'Queijo mussarela', unidade: '500g', preco: 24.00, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'presunto', nome: 'Presunto fatiado', unidade: '200g', preco: 8.50, tipo: 'ultraprocessado', icone: 'fa-layer-group', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'mortadela', nome: 'Mortadela fatiada', unidade: '300g', preco: 6.50, tipo: 'ultraprocessado', icone: 'fa-layer-group', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'salsicha', nome: 'Salsicha', unidade: 'pacote 500g', preco: 8.00, tipo: 'ultraprocessado', icone: 'fa-hotdog', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'nuggets', nome: 'Nuggets congelados', unidade: '300g', preco: 9.90, tipo: 'ultraprocessado', icone: 'fa-cubes', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'ovos', nome: 'Ovos', unidade: 'embalagem 20 und', preco: 9.99, tipo: 'natural', icone: 'fa-egg', minimoFamilia: 2, minimoTexto: '2 embalagens de ovos' },
+            { id: 'carne', nome: 'Carne bovina (acém/patinho)', unidade: '1kg', preco: 32.90, tipo: 'natural', icone: 'fa-cow', minimoFamilia: 3, minimoTexto: '3kg de carne bovina' },
+            { id: 'frango', nome: 'Frango (peito/coxa)', unidade: '1kg', preco: 15.98, tipo: 'natural', icone: 'fa-drumstick-bite', minimoFamilia: 3, minimoTexto: '3kg de frango' },
+            { id: 'peixe', nome: 'Peixe fresco (tilápia)', unidade: '1kg', preco: 25.50, tipo: 'natural', icone: 'fa-fish', minimoFamilia: 2, minimoTexto: '2kg de peixe' },
+            { id: 'atum', nome: 'Atum enlatado', unidade: 'lata', preco: 11.39, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'sardinha', nome: 'Sardinha enlatada', unidade: 'lata', preco: 6.29, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'queijo', nome: 'Queijo mussarela', unidade: '500g', preco: 20.75, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'presunto', nome: 'Presunto fatiado', unidade: '200g', preco: 7.18, tipo: 'ultraprocessado', icone: 'fa-layer-group', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'mortadela', nome: 'Mortadela fatiada', unidade: '300g', preco: 7.90, tipo: 'ultraprocessado', icone: 'fa-layer-group', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'salsicha', nome: 'Salsicha', unidade: 'pacote 500g', preco: 6.99, tipo: 'ultraprocessado', icone: 'fa-hotdog', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'nuggets', nome: 'Nuggets congelados', unidade: '300g', preco: 10.80, tipo: 'ultraprocessado', icone: 'fa-cubes', minimoFamilia: 0, minimoTexto: '' },
         ]
     },
     {
@@ -65,9 +65,9 @@ const SECOES = [
         nome: 'Gorduras e Óleos',
         icone: 'fa-jar',
         alimentos: [
-            { id: 'abacate', nome: 'Abacate', unidade: 'unidade (~500g)', preco: 6.00, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 2, minimoTexto: '2 abacates' },
-            { id: 'oleo', nome: 'Óleo de soja', unidade: 'garrafa 900ml', preco: 8.20, tipo: 'natural', icone: 'fa-wine-bottle', minimoFamilia: 1, minimoTexto: '1 garrafa de óleo' },
-            { id: 'manteiga', nome: 'Manteiga', unidade: 'pote 200g', preco: 13.50, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 1, minimoTexto: '1 pote de manteiga' },
+            { id: 'abacate', nome: 'Abacate', unidade: 'unidade (~500g)', preco: 2.99, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 2, minimoTexto: '2 abacates' },
+            { id: 'oleo', nome: 'Óleo de soja', unidade: 'garrafa 900ml', preco: 7.09, tipo: 'natural', icone: 'fa-wine-bottle', minimoFamilia: 1, minimoTexto: '1 garrafa de óleo' },
+            { id: 'manteiga', nome: 'Manteiga', unidade: 'pote 200g', preco: 11.90, tipo: 'processado', icone: 'fa-cheese', minimoFamilia: 1, minimoTexto: '1 pote de manteiga' },
             { id: 'margarina', nome: 'Margarina', unidade: 'pote 500g', preco: 7.50, tipo: 'ultraprocessado', icone: 'fa-box', minimoFamilia: 0, minimoTexto: '' },
         ]
     },
@@ -76,21 +76,21 @@ const SECOES = [
         nome: 'Legumes, Verduras e Frutas',
         icone: 'fa-carrot',
         alimentos: [
-            { id: 'cenoura', nome: 'Cenoura', unidade: '1kg', preco: 5.50, tipo: 'natural', icone: 'fa-carrot', minimoFamilia: 2, minimoTexto: '2kg de cenoura' },
-            { id: 'abobora', nome: 'Abóbora', unidade: '1kg', preco: 5.00, tipo: 'natural', icone: 'fa-pepper-hot', minimoFamilia: 2, minimoTexto: '2kg de abóbora' },
-            { id: 'batata', nome: 'Batata inglesa', unidade: '1kg', preco: 6.80, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 3, minimoTexto: '3kg de batata' },
-            { id: 'alface', nome: 'Alface', unidade: 'unidade/maço', preco: 3.50, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 4, minimoTexto: '4 unidades de alface' },
-            { id: 'couve', nome: 'Couve', unidade: 'maço', preco: 3.80, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 4, minimoTexto: '4 maços de couve' },
-            { id: 'agriao', nome: 'Agrião', unidade: 'maço', preco: 4.50, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 2, minimoTexto: '2 maços de agrião' },
-            { id: 'tomate', nome: 'Tomate', unidade: '1kg', preco: 8.50, tipo: 'natural', icone: 'fa-apple-whole', minimoFamilia: 3, minimoTexto: '3kg de tomate' },
-            { id: 'cebola', nome: 'Cebola', unidade: '1kg', preco: 6.00, tipo: 'natural', icone: 'fa-lemon', minimoFamilia: 2, minimoTexto: '2kg de cebola' },
-            { id: 'banana', nome: 'Banana', unidade: '1kg', preco: 6.50, tipo: 'natural', icone: 'fa-lemon', minimoFamilia: 3, minimoTexto: '3kg de banana' },
-            { id: 'maca', nome: 'Maçã', unidade: '1kg', preco: 8.90, tipo: 'natural', icone: 'fa-apple-whole', minimoFamilia: 2, minimoTexto: '2kg de maçã' },
-            { id: 'mamao', nome: 'Mamão', unidade: '1kg', preco: 5.80, tipo: 'natural', icone: 'fa-pepper-hot', minimoFamilia: 2, minimoTexto: '2kg de mamão' },
-            { id: 'laranja', nome: 'Laranja', unidade: '1kg', preco: 5.20, tipo: 'natural', icone: 'fa-lemon', minimoFamilia: 3, minimoTexto: '3kg de laranja' },
-            { id: 'melancia', nome: 'Melancia', unidade: 'unidade (~5kg)', preco: 18.00, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 1, minimoTexto: '1 melancia' },
-            { id: 'conserva', nome: 'Conserva (seleta de legumes)', unidade: 'lata', preco: 5.80, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'extrato-tomate', nome: 'Extrato de tomate', unidade: 'lata 340g', preco: 4.80, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'cenoura', nome: 'Cenoura', unidade: '1kg', preco: 7.80, tipo: 'natural', icone: 'fa-carrot', minimoFamilia: 2, minimoTexto: '2kg de cenoura' },
+            { id: 'abobora', nome: 'Abóbora', unidade: '1kg', preco: 3.75, tipo: 'natural', icone: 'fa-pepper-hot', minimoFamilia: 2, minimoTexto: '2kg de abóbora' },
+            { id: 'batata', nome: 'Batata inglesa', unidade: '1kg', preco: 4.89, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 3, minimoTexto: '3kg de batata' },
+            { id: 'alface', nome: 'Alface', unidade: 'unidade/maço', preco: 3.79, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 4, minimoTexto: '4 unidades de alface' },
+            { id: 'couve', nome: 'Couve', unidade: 'maço', preco: 4.50, tipo: 'natural', icone: 'fa-seedling', minimoFamilia: 4, minimoTexto: '4 maços de couve' },
+            { id: 'agriao', nome: 'Agrião', unidade: 'maço', preco: 4.69, tipo: 'natural', icone: 'fa-leaf', minimoFamilia: 2, minimoTexto: '2 maços de agrião' },
+            { id: 'tomate', nome: 'Tomate', unidade: '1kg', preco: 9.70, tipo: 'natural', icone: 'fa-apple-whole', minimoFamilia: 3, minimoTexto: '3kg de tomate' },
+            { id: 'cebola', nome: 'Cebola', unidade: '1kg', preco: 5.99, tipo: 'natural', icone: 'fa-lemon', minimoFamilia: 2, minimoTexto: '2kg de cebola' },
+            { id: 'banana', nome: 'Banana', unidade: '1kg', preco: 7.69, tipo: 'natural', icone: 'fa-lemon', minimoFamilia: 3, minimoTexto: '3kg de banana' },
+            { id: 'maca', nome: 'Maçã', unidade: '1kg', preco: 3.99, tipo: 'natural', icone: 'fa-apple-whole', minimoFamilia: 2, minimoTexto: '2kg de maçã' },
+            { id: 'mamao', nome: 'Mamão', unidade: '1kg', preco: 6.99, tipo: 'natural', icone: 'fa-pepper-hot', minimoFamilia: 2, minimoTexto: '2kg de mamão' },
+            { id: 'laranja', nome: 'Laranja', unidade: '1kg', preco: 3.99, tipo: 'natural', icone: 'fa-lemon', minimoFamilia: 3, minimoTexto: '3kg de laranja' },
+            { id: 'melancia', nome: 'Melancia', unidade: 'unidade (~5kg)', preco: 13.95, tipo: 'natural', icone: 'fa-bowl-food', minimoFamilia: 1, minimoTexto: '1 melancia' },
+            { id: 'conserva', nome: 'Conserva (seleta de legumes)', unidade: 'lata', preco: 3.79, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'extrato-tomate', nome: 'Extrato de tomate', unidade: 'lata 340g', preco: 3.29, tipo: 'processado', icone: 'fa-jar', minimoFamilia: 0, minimoTexto: '' },
         ]
     },
     {
@@ -98,10 +98,10 @@ const SECOES = [
         nome: 'Mercearia e Laticínios',
         icone: 'fa-boxes-stacked',
         alimentos: [
-            { id: 'acucar', nome: 'Açúcar', unidade: 'pacote 1kg', preco: 4.20, tipo: 'processado', icone: 'fa-cubes', minimoFamilia: 2, minimoTexto: '2kg de açúcar' },
-            { id: 'cafe', nome: 'Café', unidade: 'pacote 500g', preco: 12.50, tipo: 'processado', icone: 'fa-mug-hot', minimoFamilia: 1, minimoTexto: '1 pacote de café' },
-            { id: 'sal', nome: 'Sal', unidade: 'pacote 1kg', preco: 2.50, tipo: 'processado', icone: 'fa-mortar-pestle', minimoFamilia: 1, minimoTexto: '1kg de sal' },
-            { id: 'leite', nome: 'Leite', unidade: 'caixa 1L', preco: 5.20, tipo: 'natural', icone: 'fa-glass-water', minimoFamilia: 3, minimoTexto: '3 litros de leite' },
+            { id: 'acucar', nome: 'Açúcar', unidade: 'pacote 1kg', preco: 2.95, tipo: 'processado', icone: 'fa-cubes', minimoFamilia: 2, minimoTexto: '2kg de açúcar' },
+            { id: 'cafe', nome: 'Café', unidade: 'pacote 500g', preco: 19.49, tipo: 'processado', icone: 'fa-mug-hot', minimoFamilia: 1, minimoTexto: '1 pacote de café' },
+            { id: 'sal', nome: 'Sal', unidade: 'pacote 1kg', preco: 2.99, tipo: 'processado', icone: 'fa-mortar-pestle', minimoFamilia: 1, minimoTexto: '1kg de sal' },
+            { id: 'leite', nome: 'Leite', unidade: 'caixa 1L', preco: 5.29, tipo: 'natural', icone: 'fa-glass-water', minimoFamilia: 3, minimoTexto: '3 litros de leite' },
         ]
     },
     {
@@ -109,9 +109,9 @@ const SECOES = [
         nome: 'Bebidas',
         icone: 'fa-bottle-water',
         alimentos: [
-            { id: 'suco-caixinha-natural', nome: 'Suco de caixinha (100% natural)', unidade: 'caixa 1L', preco: 9.50, tipo: 'processado', icone: 'fa-bottle-water', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'suco-po', nome: 'Suco em pó', unidade: 'pacote (rende 1L)', preco: 2.80, tipo: 'ultraprocessado', icone: 'fa-mortar-pestle', minimoFamilia: 0, minimoTexto: '' },
-            { id: 'refrigerante', nome: 'Refrigerante', unidade: '2 litros', preco: 8.90, tipo: 'ultraprocessado', icone: 'fa-wine-bottle', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'suco-caixinha-natural', nome: 'Suco de caixinha (100% natural)', unidade: 'caixa 1L', preco: 12.49, tipo: 'processado', icone: 'fa-bottle-water', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'suco-po', nome: 'Suco em pó', unidade: 'pacote (rende 1L)', preco: 1.49, tipo: 'ultraprocessado', icone: 'fa-mortar-pestle', minimoFamilia: 0, minimoTexto: '' },
+            { id: 'refrigerante', nome: 'Refrigerante', unidade: '2 litros', preco: 7.49, tipo: 'ultraprocessado', icone: 'fa-wine-bottle', minimoFamilia: 0, minimoTexto: '' },
         ]
     },
 ];
@@ -305,10 +305,39 @@ function atualizarCartoes() {
     document.querySelectorAll('.cartao-alimento').forEach(cartao => { if (cartao._render) cartao._render(); });
 }
 
+// Atualiza os "selinhos" de diversidade — cada um acende (com uma animação de
+// desbloqueio) assim que o primeiro item daquele grupo entra no carrinho.
+function atualizarTrilhaDiversidade() {
+    let completos = 0;
+
+    GRUPOS_PARA_DIVERSIDADE.forEach(secaoId => {
+        const secao = SECOES.find(s => s.id === secaoId);
+        const temItem = secao.alimentos.some(a => (carrinho[a.id] || 0) > 0);
+        const badge = document.querySelector(`.badge-grupo[data-grupo="${secaoId}"]`);
+        if (!badge) return;
+
+        const jaEstavaCompleto = badge.classList.contains('completo');
+        badge.classList.toggle('completo', temItem);
+        if (temItem) completos++;
+
+        // Só dispara a animação de "desbloqueio" na transição incompleto → completo
+        if (temItem && !jaEstavaCompleto) {
+            const icone = badge.querySelector('.badge-icone');
+            icone.style.animation = 'none';
+            void icone.offsetWidth;
+            icone.style.animation = '';
+        }
+    });
+
+    const trofeu = document.getElementById('trilha-trofeu');
+    if (trofeu) trofeu.classList.toggle('completo', completos === GRUPOS_PARA_DIVERSIDADE.length);
+}
+
 function atualizarTudo() {
     atualizarOrcamentoNoTopo();
     atualizarSecoes();
     atualizarCartoes();
+    atualizarTrilhaDiversidade();
     avisoJaConfirmado = false; // qualquer mudança no carrinho pede um novo aviso, se ainda houver pendência
 }
 
