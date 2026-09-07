@@ -1,4 +1,3 @@
-/* ===== Conteúdo - Mercado (com tema de supermercado de verdade) ===== */
 main.mercado {
   flex: 1;
   padding: 32px 0 110px;
@@ -60,7 +59,6 @@ main.mercado {
   line-height: 1.4;
 }
 
-/* ----- Mascote lateral ----- */
 .mascote-lateral {
   background: #fff;
   border-radius: 12px;
@@ -258,7 +256,6 @@ main.mercado {
   }
 }
 
-/* ----- Abas estilo placa de corredor de mercado ----- */
 .abas-secoes {
   display: flex;
   gap: 16px;
@@ -444,7 +441,6 @@ main.mercado {
   background: rgba(231, 111, 81, 0.55);
 }
 
-/* ----- Gôndola de supermercado ----- */
 .grade-alimentos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -464,7 +460,6 @@ main.mercado {
   position: relative;
 }
 
-/* Trilho vermelho de etiqueta de preço, na base da gôndola — clássico de supermercado */
 .grade-alimentos::after {
   content: '';
   position: absolute;
@@ -509,7 +504,6 @@ main.mercado {
   }
 }
 
-/* Cascata: cada cartão aparece um pouquinho depois do anterior */
 .grade-alimentos .cartao-alimento:nth-child(1) {
   animation-delay: .02s;
 }
@@ -675,7 +669,6 @@ main.mercado {
   color: var(--tinta-suave);
 }
 
-/* Etiqueta de preço em formato de selo de oferta (borda serrilhada) */
 .cartao-alimento .preco {
   font-family: var(--fonte-numero);
   font-weight: 700;
@@ -739,8 +732,6 @@ main.mercado {
   transition: transform .15s cubic-bezier(.34, 1.56, .64, 1), color .15s ease;
 }
 
-/* Efeito 100% CSS: o número "pula" sempre que um botão é pressionado,
-   sem precisar de nenhuma classe adicionada por script. */
 .seletor-qtd:has(button:active) .qtd {
   transform: scale(1.35);
   color: var(--verde-medio);
@@ -769,7 +760,6 @@ main.mercado {
   font-weight: 600;
 }
 
-/* Rodapé fixo de finalização */
 .rodape-finalizar {
   position: fixed;
   left: 0;
@@ -827,7 +817,6 @@ main.mercado {
   transform: translateY(0) scale(.97);
 }
 
-/* Quando não há mais nenhum aviso pendente, o botão ganha um leve "respiro" convidativo */
 .rodape-finalizar:not(:has(.aviso-minimo--alerta)) .btn-finalizar {
   animation: respiro-botao 2.4s ease-in-out infinite;
 }
@@ -844,7 +833,6 @@ main.mercado {
   }
 }
 
-/* Toast de aviso */
 .toast-aviso {
   position: fixed;
   top: 18px;

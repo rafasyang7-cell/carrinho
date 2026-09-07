@@ -1,9 +1,3 @@
-// ===== Tela Final: GAME OVER =====
-// Só chegamos aqui quando faltou pelo menos 1 grupo alimentar inteiro no
-// carrinho (nenhum item de Grãos/Massas, Proteínas, Gorduras, Legumes/Frutas
-// ou Mercearia). Se a cesta tiver pelo menos 1 item de cada grupo — mesmo que
-// em quantidade insuficiente — quem decide o destino é o mercado.js, que manda
-// para vitoria.html em vez desta tela.
 document.addEventListener('DOMContentLoaded', () => {
     const nome = localStorage.getItem('carrinhoReal_nome') || 'jogador(a)';
     const dadosBrutos = localStorage.getItem('carrinhoReal_resultado');
@@ -61,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fatia-ultra').style.width = (dados.itensUltra / totalItens * 100) + '%';
     }
 
-    // Motivo principal do GAME OVER: grupos alimentares inteiros que ficaram de fora
+
     if (gruposFaltando.length > 0) {
         const blocoGrupos = document.getElementById('bloco-grupos-faltando');
         const listaGrupos = document.getElementById('lista-grupos-faltando');
@@ -73,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Informação extra: itens que entraram na cesta mas ficaram abaixo do recomendado
+
     if (itensFaltando.length > 0) {
         const blocoFaltando = document.getElementById('bloco-faltando');
         const listaFaltando = document.getElementById('lista-faltando');

@@ -1,26 +1,3 @@
-// ===== Tela Mercado =====
-// Preços médios de pesquisa de mercado nacional (referência 2026).
-// Cada alimento in natura tem um "minimoFamilia": a quantidade aproximada
-// necessária para alimentar adequadamente uma família de 4 pessoas por 1 mês.
-// A pessoa PODE finalizar a compra mesmo com alimentos abaixo do mínimo — isso
-// só gera um aviso (na hora de colocar no carrinho, e de novo ao finalizar).
-//
-// REGRA DE VITÓRIA — DIVERSIDADE: a cesta precisa ter pelo menos 1 item de cada
-// um dos 5 grupos alimentares básicos (grãos/massas, proteínas, gorduras,
-// legumes/frutas, mercearia) para ser considerada uma cesta "diversa" o
-// suficiente e resultar em VITÓRIA — mesmo que a quantidade de algum alimento
-// fique abaixo do recomendado (isso vira só um aviso na tela de resultado).
-// Se faltar um grupo alimentar inteiro (nenhum item dele no carrinho), é GAME OVER.
-//
-// FOTOS: cada alimento tenta carregar image/mascote/comida/<id>.jpg automaticamente.
-// Enquanto o arquivo não existir, aparece um ícone do Font Awesome no lugar.
-// Basta salvar a foto com o nome certo (ex: image/mascote/comida/arroz.jpg) que ela
-// substitui o ícone sozinha.
-//
-// As seções abaixo misturam, de propósito, opções in natura, processadas e
-// ultraprocessadas dentro do MESMO grupo alimentar — assim dá pra comparar e
-// trocar um alimento saudável por um mais barato dentro da mesma categoria.
-
 const ORCAMENTO_TOTAL = parseFloat(localStorage.getItem('carrinhoReal_orcamentoAlimentacao')) || 305.09;
 
 const SECOES = [
@@ -116,8 +93,6 @@ const SECOES = [
     },
 ];
 
-// Grupos considerados na regra de DIVERSIDADE (ver mais abaixo). "Bebidas" fica de
-// fora por ser mais um extra do que uma necessidade nutricional básica.
 const GRUPOS_PARA_DIVERSIDADE = ['graos-carboidratos', 'proteinas', 'gorduras', 'legumes-frutas', 'mercearia'];
 
 const carrinho = {}; // { alimentoId: quantidade }
@@ -305,8 +280,6 @@ function atualizarCartoes() {
     document.querySelectorAll('.cartao-alimento').forEach(cartao => { if (cartao._render) cartao._render(); });
 }
 
-// Atualiza os "selinhos" de diversidade — cada um acende (com uma animação de
-// desbloqueio) assim que o primeiro item daquele grupo entra no carrinho.
 function atualizarTrilhaDiversidade() {
     let completos = 0;
 
@@ -338,7 +311,7 @@ function atualizarTudo() {
     atualizarSecoes();
     atualizarCartoes();
     atualizarTrilhaDiversidade();
-    avisoJaConfirmado = false; // qualquer mudança no carrinho pede um novo aviso, se ainda houver pendência
+    avisoJaConfirmado = false;
 }
 
 // ----- Toast de aviso -----
@@ -357,8 +330,6 @@ function mostrarToast(mensagem) {
     timeoutToast = setTimeout(() => toast.classList.remove('mostrar'), 5000);
 }
 
-// Quantos dos 5 grupos alimentares básicos têm pelo menos 1 item no carrinho
-// (não importa a quantidade — isso é só sobre ter VARIEDADE na cesta).
 function calcularDiversidade() {
     const gruposComItem = GRUPOS_PARA_DIVERSIDADE.filter(secaoId => {
         const secao = SECOES.find(s => s.id === secaoId);
@@ -372,10 +343,6 @@ function calcularDiversidade() {
     };
 }
 
-// Não existe mais bloqueio por quantidade insuficiente — a pessoa pode finalizar
-// mesmo com itens pela metade. Só pedimos uma confirmação (1 clique de aviso +
-// 1 clique pra confirmar) quando há alimentos abaixo do recomendado, pra garantir
-// que ela viu o aviso antes de seguir.
 let avisoJaConfirmado = false;
 
 function tentarFinalizar() {
@@ -396,7 +363,7 @@ function finalizarCompra() {
     let itensNatural = 0, itensProcessado = 0, itensUltra = 0;
     const categoriasUltraCompradas = new Set();
     const listaCarrinho = [];
-    const essenciaisFaltando = []; // qualquer item com mínimo que ficou abaixo do recomendado (aviso)
+    const essenciaisFaltando = [];
 
     SECOES.forEach(secao => {
         secao.alimentos.forEach(alimento => {
@@ -431,10 +398,6 @@ function finalizarCompra() {
     };
 
     localStorage.setItem('carrinhoReal_resultado', JSON.stringify(resultado));
-
-    // VITÓRIA: a cesta tem pelo menos 1 item de cada um dos 5 grupos alimentares
-    // básicos — mesmo que a quantidade de algum deles esteja abaixo do recomendado
-    // (isso só gera um aviso na tela de resultado). GAME OVER: falta 1 grupo inteiro.
     window.location.href = diversidade.atingida ? 'vitoria.html' : 'final.html';
 }
 

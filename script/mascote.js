@@ -1,18 +1,5 @@
-// ===== Mascote (bonequinho de reações) =====
-// Compartilhado pelas telas inicial, mercado e final.
-//
-// AS IMAGENS FICAM DIRETO DENTRO DE image/mascote/ (sem subpastas), com estes nomes exatos:
-//
-//   Feminino:      fem neutro.png   fem feliz.png   fem preocupada.png   fem triste.png   fem chocada.png
-//   Masculino:     masc neutro.png  masc feliz.png  masc preocupado.png  masc triste.png  masc chocado.png
-//   Não binário:   nao neutro.png   nao feliz.png   nao preocupado.png   nao triste.png   nao chocado.png
-//
-// Se algum arquivo estiver faltando ou com nome diferente, o código desenha um rosto
-// simples (SVG) no lugar automaticamente — já com cabelo/estilo diferente por gênero.
-
 const MASCOTE_ESTADOS = ['neutro', 'feliz', 'preocupado', 'triste', 'chocado'];
 
-// Nome exato do arquivo dentro de image/mascote/ para cada gênero + estado
 const ARQUIVOS_MASCOTE = {
   feminino: {
     neutro: 'fem neutro.png',
@@ -41,7 +28,6 @@ function obterGeneroPersonagem() {
   return localStorage.getItem('carrinhoReal_genero') || 'nao-binario';
 }
 
-// Desenha um rosto simples em SVG para cada estado / gênero (usado só se a imagem não carregar)
 function svgRostoMascote(estado, genero) {
   const bocas = {
     neutro: '<path d="M 40,68 Q 55,70 70,68" stroke="#22333B" stroke-width="3.5" stroke-linecap="round" fill="none"/>',

@@ -1,10 +1,8 @@
-/* ===== Conteúdo - Renda Familiar (layout em coluna única, mais espaçoso) ===== */
 main.salario {
     flex: 1;
     padding: 48px 0 64px;
 }
 
-/* ----- Faixa de saudação ----- */
 .faixa-saudacao {
     background: var(--verde-escuro);
     color: #fff;
@@ -43,7 +41,6 @@ main.salario {
     color: var(--trigo);
 }
 
-/* ----- Cartões de renda individual ----- */
 .grade-rendas {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -198,7 +195,6 @@ main.salario {
     font-size: 1.15rem;
 }
 
-/* ----- Renda combinada + per capita ----- */
 .cartao-renda-combinada {
     display: flex;
     justify-content: space-between;
@@ -271,7 +267,6 @@ main.salario {
     color: var(--verde-escuro);
 }
 
-/* ----- Despesas fixas ----- */
 .cartao-despesas {
     background: var(--papel-cartao);
     border-radius: var(--raio);
@@ -357,7 +352,6 @@ main.salario {
     white-space: nowrap;
 }
 
-/* ----- Resultado final ----- */
 .faixa-resultado {
     background: var(--papel-cartao);
     border-radius: var(--raio);

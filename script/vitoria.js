@@ -1,9 +1,3 @@
-// ===== Tela Final: VITÓRIA =====
-// Só chegamos aqui quando a cesta tem pelo menos 1 item de cada um dos 5 grupos
-// alimentares básicos (Grãos/Massas, Proteínas, Gorduras, Legumes/Frutas e
-// Mercearia) — mesmo que a quantidade de algum deles esteja abaixo do recomendado
-// (nesse caso, a tela mostra um aviso, mas a vitória continua valendo). Quem decide
-// isso é o mercado.js — se faltar um grupo inteiro, vai para final.html (GAME OVER).
 document.addEventListener('DOMContentLoaded', () => {
     const nome = localStorage.getItem('carrinhoReal_nome') || 'jogador(a)';
     const dadosBrutos = localStorage.getItem('carrinhoReal_resultado');
@@ -19,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const totalItens = dados.itensNatural + dados.itensProcessado + dados.itensUltra;
     const saldoFinal = dados.orcamentoTotal - dados.gastoTotal;
-    // "cesta completa" = nenhum alimento com mínimo ficou de fora (não só os essenciais).
     const cestaCompleta = !dados.essenciaisFaltando || dados.essenciaisFaltando.length === 0;
     const usouUltraprocessado = dados.itensUltra > 0;
 
@@ -96,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dispararConfete();
 });
 
-// Comemoração simples em CSS/JS puro, sem precisar de nenhum arquivo externo.
 function dispararConfete() {
     const cores = ['#52B788', '#E9C46A', '#E76F51', '#1B4332', '#FFFFFF'];
     const camada = document.createElement('div');
@@ -113,6 +105,5 @@ function dispararConfete() {
         camada.appendChild(pedaco);
     }
 
-    // Remove a camada depois que a festa acaba, pra não deixar elementos "mortos" na página
     setTimeout(() => camada.remove(), 5000);
 }

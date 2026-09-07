@@ -1,4 +1,3 @@
-/* ===== Conteúdo - Resultado Final ===== */
 main.final {
     flex: 1;
     padding: 56px 0 64px;
@@ -241,7 +240,7 @@ main.final {
     color: var(--tomate);
 }
 
-/* Barra natural vs ultraprocessado */
+
 .barra-composicao {
     margin-bottom: 30px;
 }
@@ -308,7 +307,6 @@ main.final {
     background: var(--tomate);
 }
 
-/* Lista de itens comprados */
 .lista-carrinho-final {
     margin-bottom: 30px;
 }
